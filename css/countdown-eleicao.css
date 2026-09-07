@@ -1,0 +1,247 @@
+/* ==========================================================================
+   SEÇÃO COUNTDOWN DA ELEIÇÃO (FUNDO BRANCO + ESTILO FLIP/CARDS)
+   Adir Gentil 2211 - Deputado Federal (Tocantins)
+   ========================================================================== */
+
+.countdown-election-section {
+  position: relative;
+  background-color: #ffffff !important;
+  color: #0f172a;
+  padding: clamp(60px, 8vw, 100px) 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.countdown-election-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #12b24b 0%, #ffcb05 50%, #005baa 100%);
+}
+
+.countdown-election-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.countdown-election-head {
+  max-width: 780px;
+  margin: 0 auto 40px;
+}
+
+.countdown-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  color: #005baa;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.countdown-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #12b24b;
+  animation: countdownPulse 1.8s infinite;
+}
+
+@keyframes countdownPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.countdown-title {
+  font-family: Gotham, system-ui, -apple-system, sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #003f7d;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.countdown-title span.accent-green {
+  color: #015F34;
+}
+
+.countdown-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* --- GRID DE CONTADORES --- */
+.countdown-clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 24px);
+  margin: 36px auto;
+  flex-wrap: nowrap;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Par de dígitos (como na imagem de referência) */
+.countdown-digits {
+  display: flex;
+  gap: 4px;
+}
+
+.countdown-digit-card {
+  position: relative;
+  width: clamp(40px, 7.5vw, 76px);
+  height: clamp(56px, 10.5vw, 106px);
+  background: #eef9f2; /* Tom menta suave como na referência */
+  border: 2px solid #c4e9d3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(1, 95, 52, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+/* Linha divisória horizontal do estilo flip card */
+.countdown-digit-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(1, 95, 52, 0.15);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  z-index: 2;
+}
+
+.countdown-number {
+  font-family: Gotham, system-ui, -apple-system, sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #015F34;
+  letter-spacing: -0.04em;
+  z-index: 1;
+}
+
+.countdown-label {
+  font-size: clamp(0.72rem, 1.3vw, 0.88rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+}
+
+/* Separador de dois pontos */
+.countdown-separator {
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  color: #015F34;
+  line-height: 1;
+  margin-top: -24px;
+  user-select: none;
+  opacity: 0.75;
+}
+
+/* --- ÁREA DO CTA --- */
+.countdown-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.countdown-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 34px;
+  background: linear-gradient(135deg, #12b24b 0%, #015F34 100%);
+  color: #ffffff !important;
+  font-family: Gotham, system-ui, -apple-system, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 9999px;
+  box-shadow: 0 10px 28px rgba(18, 178, 75, 0.35);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.countdown-btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(18, 178, 75, 0.45);
+  filter: brightness(1.06);
+}
+
+.countdown-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background: #f8fafc;
+  color: #003f7d !important;
+  font-family: Gotham, system-ui, -apple-system, sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: 2px solid #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.countdown-btn-secondary:hover {
+  background: #ffffff;
+  border-color: #005baa;
+  color: #005baa !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 91, 170, 0.12);
+}
+
+@media (max-width: 640px) {
+  .countdown-digits {
+    gap: 2px;
+  }
+  .countdown-digit-card {
+    border-radius: 8px;
+  }
+  .countdown-clock {
+    gap: 4px;
+  }
+  .countdown-separator {
+    margin-top: -18px;
+  }
+  .countdown-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .countdown-btn-primary,
+  .countdown-btn-secondary {
+    width: 100%;
+  }
+}

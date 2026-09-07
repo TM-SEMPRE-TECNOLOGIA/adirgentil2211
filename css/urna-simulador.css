@@ -1,0 +1,755 @@
+/* ==========================================================================
+   SIMULADOR DE URNA ELETRÔNICA - ADIR GENTIL 2211
+   Campanha Oficial Adir Gentil • Deputado Federal • PL Tocantins
+   ========================================================================== */
+
+.urna-section {
+  position: relative;
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 50%, #f1f5f9 100%);
+  border-top: 1px solid rgba(0, 91, 170, 0.08);
+  border-bottom: 1px solid rgba(0, 91, 170, 0.08);
+  overflow: hidden;
+}
+
+.urna-section::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 91, 170, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.urna-section::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(1, 95, 52, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.urna-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px auto;
+  position: relative;
+  z-index: 2;
+}
+
+.urna-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(0, 91, 170, 0.08);
+  border: 1px solid rgba(0, 91, 170, 0.2);
+  border-radius: 999px;
+  color: #005baa;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.urna-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #0b192c;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.urna-title .highlight-gold {
+  color: #d97706;
+}
+
+.urna-title .highlight-green {
+  color: #015f34;
+}
+
+.urna-subtitle {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* ── MÁQUINA DA URNA ── */
+.urna-machine-container {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.urna-chassis {
+  background: #d8dde3;
+  background: linear-gradient(145deg, #e2e7ec 0%, #cbd3dc 100%);
+  border: 4px solid #aeb8c4;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2),
+              inset 0 2px 4px rgba(255, 255, 255, 0.8),
+              inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* ── TELA LCD DA URNA ── */
+.urna-screen-outer {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.6),
+              0 2px 4px rgba(255, 255, 255, 0.5);
+  display: flex;
+}
+
+.urna-screen-lcd {
+  flex: 1;
+  background-color: #dcf7c8;
+  background: linear-gradient(180deg, #dcf7c8 0%, #cceeb3 100%);
+  border: 3px solid #789966;
+  border-radius: 8px;
+  padding: 18px 20px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.12);
+  color: #0a0e14;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+.urna-lcd-top {
+  position: relative;
+}
+
+.urna-lcd-header-bar {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.urna-lcd-cargo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000000;
+  letter-spacing: 0.03em;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.urna-digits-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+
+.urna-digits-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.urna-digits-boxes {
+  display: flex;
+  gap: 8px;
+}
+
+.urna-digit-slot {
+  width: 38px;
+  height: 48px;
+  border: 2px solid #1e293b;
+  background: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #000;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.urna-digit-slot.active-blink {
+  animation: urnaDigitBlink 0.9s infinite;
+}
+
+@keyframes urnaDigitBlink {
+  0%, 100% { border-color: #000; background: #ffffff; }
+  50% { border-color: #0284c7; background: #e0f2fe; }
+}
+
+/* Informações do Candidato e Foto */
+.urna-candidate-info {
+  margin-top: 6px;
+  min-height: 80px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #000;
+}
+
+.urna-candidate-info .label-field {
+  font-size: 0.8rem;
+  color: #374151;
+  text-transform: uppercase;
+}
+
+.urna-candidate-info .candidate-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #000;
+}
+
+.urna-candidate-info .candidate-party {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #004d26;
+}
+
+.urna-candidate-info .vote-invalid-msg {
+  color: #b91c1c;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 8px 0;
+}
+
+/* Moldura da Foto Oficial na Urna */
+.urna-photo-frame {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 100px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.urna-photo-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.urna-photo-caption {
+  width: 100%;
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 2px 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Instruções na base da tela */
+.urna-lcd-footer {
+  border-top: 2px solid rgba(0, 0, 0, 0.25);
+  padding-top: 10px;
+  margin-top: auto;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #1e293b;
+}
+
+.urna-lcd-footer strong {
+  color: #000;
+}
+
+.urna-btn-hint {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.urna-hint-confirma { background: #16a34a; color: #fff; }
+.urna-hint-corrige { background: #ea580c; color: #fff; }
+
+/* Tela FIM */
+.urna-screen-fim {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.urna-fim-text {
+  font-size: clamp(3.5rem, 6vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #000000;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.urna-fim-sub {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #015f34;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.urna-fim-detail {
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ── TECLADO DA URNA ── */
+.urna-keypad-outer {
+  background: #1a202c;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.08),
+              0 8px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.urna-keypad-header {
+  text-align: center;
+  color: #f8fafc;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.urna-keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.urna-key {
+  height: 50px;
+  background: #2d3748;
+  background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  color: #ffffff;
+  border: 1px solid #111827;
+  border-radius: 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #111827, 0 6px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.1s ease;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.urna-key:hover {
+  background: linear-gradient(180deg, #4b5563 0%, #374151 100%);
+}
+
+.urna-key:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #111827, 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.urna-key-zero {
+  grid-column: 2;
+}
+
+/* Teclas Especiais de Ação */
+.urna-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.urna-action-key {
+  height: 48px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.urna-action-key:active {
+  transform: translateY(3px);
+}
+
+.urna-key-branco {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 4px 0 #9ca3af, 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.urna-key-branco:active {
+  box-shadow: 0 1px 0 #9ca3af;
+}
+
+.urna-key-corrige {
+  background: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #9a3412, 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.urna-key-corrige:active {
+  box-shadow: 0 1px 0 #9a3412;
+}
+
+.urna-key-confirma {
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 0.82rem;
+  height: 52px;
+  box-shadow: 0 4px 0 #14532d, 0 6px 8px rgba(0, 0, 0, 0.4);
+  align-self: flex-end;
+}
+
+.urna-key-confirma:active {
+  box-shadow: 0 1px 0 #14532d;
+}
+
+/* Card de Feedback Pós-Votação */
+.urna-success-card {
+  margin-top: 28px;
+  background: #ffffff;
+  border: 2px solid #16a34a;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 10px 25px rgba(22, 163, 74, 0.12);
+  animation: urnaSlideUp 0.4s ease forwards;
+}
+
+@keyframes urnaSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.urna-success-info h4 {
+  font-size: 1.1rem;
+  color: #0f172a;
+  font-weight: 800;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.urna-success-info p {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+}
+
+.urna-success-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.urna-btn-share {
+  padding: 10px 18px;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.urna-btn-share:hover {
+  background: #1eb954;
+}
+
+.urna-btn-retry {
+  padding: 10px 16px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.urna-btn-retry:hover {
+  background: #e2e8f0;
+}
+
+/* ── RESPONSIVIDADE ── */
+@media (max-width: 860px) {
+  .urna-chassis {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .urna-screen-lcd {
+    min-height: 320px;
+  }
+
+  .urna-success-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .urna-success-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .urna-chassis {
+    padding: 14px;
+  }
+
+  .urna-digits-boxes {
+    gap: 6px;
+  }
+
+  .urna-digit-slot {
+    width: 32px;
+    height: 42px;
+    font-size: 1.4rem;
+  }
+
+  .urna-photo-frame {
+    width: 78px;
+  }
+
+  .urna-photo-img {
+    height: 85px;
+  }
+
+  .urna-key {
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .urna-action-key {
+    height: 42px;
+    font-size: 0.7rem;
+  }
+}
+
+
+/* ==============================================================================
+   CALL TO ACTION (CTA) OFICIAL DE COMPARTILHAMENTO DA URNA ELETRÔNICA
+   Compliance: Resolução TSE nº 23.610/2019 (Engajamento e Compartilhamento Orgânico)
+============================================================================== */
+.urna-share-cta {
+  margin-top: 36px;
+  background: linear-gradient(135deg, rgba(0, 43, 127, 0.95) 0%, rgba(10, 25, 47, 0.98) 100%);
+  border: 2px solid rgba(255, 203, 5, 0.35);
+  border-radius: 20px;
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: 0 20px 45px rgba(0, 31, 77, 0.4), 0 0 30px rgba(255, 203, 5, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.urna-share-cta::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(22, 163, 74, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.urna-share-cta__content {
+  flex: 1;
+  max-width: 680px;
+  z-index: 1;
+}
+
+.urna-share-cta__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 203, 5, 0.15);
+  border: 1px solid #ffcb05;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #ffcb05;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.urna-share-cta__pulse {
+  width: 8px;
+  height: 8px;
+  background: #12b24b;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #12b24b;
+  animation: urnaPulse 1.8s infinite;
+}
+
+@keyframes urnaPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.urna-share-cta__title {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.urna-share-cta__desc {
+  font-size: 0.98rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+.urna-share-cta__desc strong {
+  color: #ffcb05;
+}
+
+.urna-share-cta__legal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.urna-share-cta__legal svg {
+  flex-shrink: 0;
+  color: #12b24b;
+}
+
+.urna-share-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 240px;
+  z-index: 1;
+}
+
+.urna-share-btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 16px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(34, 197, 94, 0.38);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.urna-share-btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(34, 197, 94, 0.5);
+  background: linear-gradient(135deg, #16a34a 0%, #14532d 100%);
+}
+
+.urna-share-btn-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.urna-share-btn-copy:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #ffcb05;
+  color: #ffcb05;
+}
+
+@media (max-width: 900px) {
+  .urna-share-cta {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+    gap: 20px;
+  }
+  .urna-share-cta__legal {
+    justify-content: center;
+  }
+  .urna-share-cta__actions {
+    width: 100%;
+  }
+}

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna Eletrônica Oficial - Adir Gentil 2211</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background-color: #0d1117;
+            background: linear-gradient(135deg, #0b1329 0%, #0d1117 100%);
+            color: #f0f6fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .header-title h1 {
+            font-size: 24px;
+            color: #ffcb05;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .header-title p {
+            font-size: 14px;
+            color: #8b949e;
+        }
+        
+        /* Layout Principal: Urna Centralizada */
+        .app-container {
+            display: flex;
+            justify-content: center;
+            max-width: 860px;
+            width: 100%;
+        }
+
+        /* Urna Eletrônica */
+        .urna {
+            width: 100%;
+            background-color: #d1d5db;
+            background: linear-gradient(145deg, #e5e7eb 0%, #cbd5e1 100%);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            gap: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.7);
+            border: 4px solid #9ca3af;
+        }
+        
+        /* Tela da Urna */
+        .tela-container {
+            flex: 1.3;
+            background-color: #dcfecc;
+            background: linear-gradient(180deg, #dcfecc 0%, #c6e9b4 100%);
+            border: 3px solid #65a30d;
+            border-radius: 8px;
+            padding: 18px;
+            height: 380px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.18);
+            color: #000;
+        }
+        .cargo {
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #111;
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+            padding-bottom: 4px;
+        }
+        .numero-container {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+            align-items: center;
+        }
+        .digito {
+            width: 36px;
+            height: 48px;
+            border: 2px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            font-weight: bold;
+            background: #fff;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .digito.pisca { animation: pisca 1s infinite; }
+        @keyframes pisca { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        .info-candidato {
+            margin-top: 10px;
+            line-height: 1.45;
+            font-size: 14px;
+        }
+        
+        /* Foto Oficial do Candidato */
+        .foto-candidato {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 105px;
+            height: 125px;
+            border: 2px solid #000;
+            background: #ffffff;
+            color: #000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .foto-candidato img {
+            width: 100%;
+            height: 102px;
+            object-fit: cover;
+            object-position: top center;
+        }
+        .foto-candidato span {
+            background: #000;
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            padding: 2px 0;
+        }
+
+        .instrucoes {
+            border-top: 2px solid #000;
+            padding-top: 8px;
+            font-size: 11px;
+            color: #222;
+            line-height: 1.4;
+        }
+        .fim-tela {
+            font-size: 60px;
+            font-weight: 900;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #000;
+            letter-spacing: 2px;
+        }
+        .fim-sub {
+            font-size: 14px;
+            font-weight: bold;
+            color: #015F34;
+            letter-spacing: 1px;
+        }
+
+        /* Teclado da Urna */
+        .teclado {
+            flex: 0.9;
+            background-color: #1f2937;
+            background: linear-gradient(180deg, #283344 0%, #171f2c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 6px 12px rgba(0,0,0,0.4);
+        }
+        .justica-eleitoral {
+            color: #f3f4f6;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+        .teclas-numericas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+        .btn-num {
+            background: #111827;
+            color: #fff;
+            border: 1px solid #030712;
+            height: 46px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px #000;
+            transition: transform 0.05s ease, box-shadow 0.05s ease;
+        }
+        .btn-num:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #000;
+        }
+        
+        .teclas-acoes {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px;
+        }
+        .btn-acao {
+            flex: 1;
+            height: 48px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px rgba(0,0,0,0.3);
+            transition: transform 0.05s ease;
+        }
+        .btn-acao:active {
+            transform: translateY(2px);
+        }
+        .btn-branco { background-color: #fff; color: #000; box-shadow: 0 4px #9ca3af; }
+        .btn-corrige { background-color: #f97316; color: #fff; box-shadow: 0 4px #c2410c; }
+        .btn-confirma { background-color: #16a34a; color: #fff; font-size: 10px; box-shadow: 0 4px #15803d; }
+
+        @media (max-width: 768px) {
+            .urna { flex-direction: column; padding: 16px; }
+            .tela-container { height: 330px; }
+        }
+    </style>
+  <meta property="og:image" content="https://adirgentil2211.vercel.app/assets/og-image.jpg" />
+  <meta name="twitter:image" content="https://adirgentil2211.vercel.app/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="571" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<div class="header-title">
+    <h1>SIMULADOR DE URNA ELETRÔNICA</h1>
+    <p>Treine a votação para Deputado Federal • Adir Gentil 2211 (PL Tocantins)</p>
+</div>
+
+<div class="app-container">
+    <!-- Urna Eletrônica (Sidebar Removido Conforme Solicitado) -->
+    <main class="urna">
+        <div class="tela-container" id="tela">
+            <div id="telaConteudoNormal" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <div>
+                    <div class="cargo">DEPUTADO FEDERAL</div>
+                    <div class="numero-container">
+                        <span>Número:</span>
+                        <div class="digito pisca" id="d1"></div>
+                        <div class="digito" id="d2"></div>
+                        <div class="digito" id="d3"></div>
+                        <div class="digito" id="d4"></div>
+                    </div>
+                    <div class="info-candidato" id="info"></div>
+                </div>
+                
+                <!-- Foto Oficial de Adir Gentil -->
+                <div class="foto-candidato" id="foto">
+                    <img src="./assets/images/urna-adir-gentil-oficial.webp" alt="Adir Gentil 2211">
+                    <span>ADIR GENTIL</span>
+                </div>
+
+                <div class="instrucoes">
+                    Aperte <strong>CONFIRMA</strong> para Votar em 2211<br>
+                    Aperte <strong>CORRIGE</strong> para Reiniciar
+                </div>
+            </div>
+
+            <!-- Fim de Voto -->
+            <div id="telaFim" style="display: none; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                <div class="fim-tela">
+                    FIM
+                    <span class="fim-sub">VOTO GRAVADO</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="teclado">
+            <div class="justica-eleitoral">Justiça Eleitoral</div>
+            <div class="teclas-numericas">
+                <button class="btn-num" onclick="digitar('1')">1</button>
+                <button class="btn-num" onclick="digitar('2')">2</button>
+                <button class="btn-num" onclick="digitar('3')">3</button>
+                <button class="btn-num" onclick="digitar('4')">4</button>
+                <button class="btn-num" onclick="digitar('5')">5</button>
+                <button class="btn-num" onclick="digitar('6')">6</button>
+                <button class="btn-num" onclick="digitar('7')">7</button>
+                <button class="btn-num" onclick="digitar('8')">8</button>
+                <button class="btn-num" onclick="digitar('9')">9</button>
+                <button class="btn-num" style="grid-column: 2;" onclick="digitar('0')">0</button>
+            </div>
+            <div class="teclas-acoes">
+                <button class="btn-acao btn-branco" onclick="branco()">BRANCO</button>
+                <button class="btn-acao btn-corrige" onclick="corrige()">CORRIGE</button>
+                <button class="btn-acao btn-confirma" onclick="confirma()">CONFIRMA</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    let numeroDigitado = "";
+    let isBranco = false;
+
+    // Síntese de Áudio sem dependências externas
+    let audioCtx = null;
+    function getAudioCtx() {
+        if (!audioCtx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) audioCtx = new AC();
+        }
+        if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+        return audioCtx;
+    }
+
+    function tocarBip() {
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.06);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.06);
+        } catch (_) {}
+    }
+
+    function tocarSomConfirma() {
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const t = ctx.currentTime;
+            osc.frequency.setValueAtTime(520, t);
+            osc.frequency.setValueAtTime(780, t + 0.08);
+            osc.frequency.setValueAtTime(1040, t + 0.16);
+            osc.frequency.setValueAtTime(1320, t + 0.24);
+            gain.gain.setValueAtTime(0.28, t);
+            gain.gain.setValueAtTime(0.28, t + 0.26);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.40);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(t + 0.40);
+        } catch (_) {}
+    }
+
+    function atualizarTela() {
+        if (isBranco) {
+            for (let i = 1; i <= 4; i++) {
+                const el = document.getElementById(`d${i}`);
+                el.innerText = "";
+                el.classList.remove('pisca');
+            }
+            document.getElementById('info').innerHTML = "<div style='color:#333; font-weight:bold;'>VOTO EM BRANCO</div>";
+            document.getElementById('foto').style.display = "none";
+            return;
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            const el = document.getElementById(`d${i}`);
+            el.innerText = numeroDigitado[i-1] || "";
+            el.classList.remove('pisca');
+        }
+
+        if (numeroDigitado.length < 4) {
+            document.getElementById(`d${numeroDigitado.length + 1}`).classList.add('pisca');
+        }
+
+        const info = document.getElementById('info');
+        const foto = document.getElementById('foto');
+
+        if (numeroDigitado === "2211") {
+            info.innerHTML = "Nome: <strong>ADIR GENTIL</strong><br>Partido: <strong>PL (Partido Liberal)</strong>";
+            foto.style.display = "flex";
+        } else {
+            info.innerHTML = numeroDigitado.length === 4 ? "<span style='color:red; font-weight:bold;'>VOTO NULO / INCORRETO</span>" : "";
+            foto.style.display = "none";
+        }
+    }
+
+    function digitar(n) {
+        if (numeroDigitado.length < 4) {
+            isBranco = false;
+            tocarBip();
+            numeroDigitado += n;
+            atualizarTela();
+        }
+    }
+
+    function branco() {
+        tocarBip();
+        numeroDigitado = "";
+        isBranco = true;
+        atualizarTela();
+    }
+
+    function corrige() {
+        tocarBip();
+        numeroDigitado = "";
+        isBranco = false;
+        atualizarTela();
+    }
+
+    function confirma() {
+        if (!isBranco && numeroDigitado.length < 4) {
+            tocarBip();
+            return;
+        }
+
+        tocarSomConfirma();
+        
+        const telaNormal = document.getElementById('telaConteudoNormal');
+        const telaFim = document.getElementById('telaFim');
+
+        telaNormal.style.display = 'none';
+        telaFim.style.display = 'flex';
+        
+        setTimeout(() => {
+            telaFim.style.display = 'none';
+            telaNormal.style.display = 'flex';
+            numeroDigitado = "";
+            isBranco = false;
+            atualizarTela();
+        }, 850);
+    }
+</script>
+
+</body>
+</html>

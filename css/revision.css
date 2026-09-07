@@ -1,0 +1,861 @@
+/* ======================================================================
+   ROUND 2 — refinamentos solicitados
+   Isolado para evitar regressões no styles.css principal.
+   ====================================================================== */
+:root {
+  --rev-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --rev-brand-stroke: 1.05;
+  --rev-support-height: 235vh;
+}
+
+/* 1) Wipe de mensagem: mantém os dois lados visualmente equivalentes. */
+.site-scroll-wipe__copy p {
+  text-wrap: balance;
+}
+.site-scroll-wipe__panel--first .site-scroll-wipe__copy p {
+  max-width: 13ch;
+}
+.site-scroll-wipe__panel--second .site-scroll-wipe__copy p {
+  max-width: 14ch;
+}
+
+/* 2) Carrossel de propostas — arraste por mouse/touch com feedback visual. */
+.proposal-track {
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+.proposal-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+.proposal-track.is-dragging .proposal-card {
+  pointer-events: none;
+}
+.proposal-track.is-dragging .proposal-card,
+.proposal-track.is-dragging .proposal-image {
+  transition-duration: 80ms !important;
+}
+
+/* 3) Título de realizações: nunca quebrar dentro da palavra. */
+.accomplishments .intro h2 {
+  max-width: 620px;
+  font-size: clamp(3rem, 6vw, 5.7rem);
+  line-height: 0.9;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  text-wrap: balance;
+}
+.accomplishments .intro {
+  min-width: 0;
+}
+@media (min-width: 980px) {
+  .accomplishments-grid {
+    grid-template-columns: minmax(340px, 0.44fr) minmax(0, 0.56fr);
+    gap: 58px;
+  }
+}
+@media (max-width: 560px) {
+  .accomplishments .intro h2 {
+    font-size: clamp(2.75rem, 14vw, 4.35rem);
+    line-height: 0.92;
+  }
+}
+
+/* 4 + 8) Marca animada reaproveitável no header e footer. */
+.animated-brand {
+  position: relative;
+  display: inline-block !important;
+  isolation: isolate;
+  overflow: visible;
+}
+.animated-brand__draw {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 50%;
+  width: 72%;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, -50%, 0);
+}
+.animated-brand__draw svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.animated-brand__draw .tr {
+  fill-opacity: 0;
+  stroke: var(--sc, currentColor);
+  stroke-width: var(--rev-brand-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: calc(var(--L) * 1px);
+  stroke-dashoffset: calc(var(--L) * 1px);
+  vector-effect: non-scaling-stroke;
+}
+.animated-brand__lockup {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100% !important;
+  height: auto;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 0.42s ease, transform 0.58s var(--rev-ease);
+}
+.animated-brand.is-animating .animated-brand__draw {
+  opacity: 1;
+}
+.animated-brand.is-animating .animated-brand__draw .tr {
+  animation: revBrandTrace 0.92s var(--rev-ease) forwards,
+    revBrandFill 0.32s ease forwards;
+  animation-delay: calc(0.16s + var(--i, 0) * 58ms),
+    calc(0.86s + var(--i, 0) * 58ms);
+}
+.animated-brand.is-animating .animated-brand__lockup {
+  opacity: 0;
+  transform: translate3d(0, 5px, 0) scale(0.985);
+}
+.animated-brand.is-complete .animated-brand__draw {
+  opacity: 0;
+  transition: opacity 0.26s ease;
+}
+.animated-brand.is-complete .animated-brand__lockup {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+@keyframes revBrandTrace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes revBrandFill {
+  to {
+    fill-opacity: 1;
+    stroke-width: 0;
+  }
+}
+
+.animated-brand--header {
+  width: 160px;
+}
+.animated-brand--footer {
+  width: 250px;
+}
+
+/* 5) Imagens editoriais nas notícias. */
+.news-image--photo {
+  display: block;
+  min-height: 240px;
+  background: #d6dee5;
+}
+.news-image--photo img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.002);
+  transition: transform 0.65s var(--rev-ease), filter 0.65s ease;
+}
+.news-card:hover .news-image--photo img {
+  transform: scale(1.055);
+  filter: saturate(1.04) contrast(1.02);
+}
+.news-credit {
+  position: absolute;
+  z-index: 3;
+  right: 10px;
+  bottom: 8px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(0, 26, 51, 0.54);
+  backdrop-filter: blur(6px);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* 6) Doação / voluntariado — segundo wipe controlado pela mesma engine JS. */
+.support-wipe {
+  position: relative;
+  height: var(--rev-support-height);
+  overflow: visible;
+  background: var(--blue);
+  color: #fff;
+  --site-wipe-progress: 0;
+}
+.support-wipe__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+.support-wipe__panel {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  padding: clamp(42px, 8vw, 110px) clamp(24px, 8vw, 110px);
+  display: grid;
+  place-items: center;
+}
+.support-wipe__panel > div {
+  width: min(820px, 100%);
+  text-align: left;
+}
+.support-wipe__panel h2 {
+  max-width: 10ch;
+  font-size: clamp(3.6rem, 8.8vw, 8rem);
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+.support-wipe__panel p {
+  max-width: 48ch;
+  margin-inline: 0;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+.support-wipe__panel::before {
+  content: "22";
+  right: clamp(-50px, -2vw, -10px);
+  bottom: -8vh;
+  font-size: clamp(14rem, 35vw, 34rem);
+  opacity: 0.055;
+}
+.support-wipe__panel--first {
+  z-index: 1;
+  background: radial-gradient(
+      42vw 42vw at 20% 30%,
+      rgba(255, 255, 255, 0.12),
+      transparent 70%
+    ),
+    var(--blue);
+  opacity: calc(1 - var(--site-wipe-progress) * 0.2);
+  transform: translate3d(calc(var(--site-wipe-progress) * -2.2vw), 0, 0);
+}
+.support-wipe__panel--second {
+  z-index: 2;
+  background: radial-gradient(
+      36vw 36vw at 75% 62%,
+      rgba(255, 203, 5, 0.17),
+      transparent 70%
+    ),
+    var(--green);
+  clip-path: inset(0 0 0 calc((1 - var(--site-wipe-progress)) * 100%));
+  will-change: clip-path;
+}
+.support-wipe__panel--second > div {
+  opacity: calc(0.55 + var(--site-wipe-progress) * 0.45);
+  transform: translate3d(calc((1 - var(--site-wipe-progress)) * 8vw), 0, 0);
+  will-change: transform, opacity;
+}
+.support-wipe__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--yellow);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+.support-wipe__eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), var(--yellow));
+}
+.support-wipe__panel--second .support-wipe__eyebrow::before {
+  background: linear-gradient(90deg, var(--yellow), #fff);
+}
+.support-wipe .email-form {
+  justify-content: flex-start;
+  width: min(560px, 100%);
+}
+
+/* 7) FAQ aprimorado + outline fino ao fundo. */
+.faq-enhanced {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(
+      circle at 82% 12%,
+      rgba(255, 203, 5, 0.16),
+      transparent 26%
+    ),
+    radial-gradient(circle at 13% 76%, rgba(18, 178, 75, 0.08), transparent 24%),
+    linear-gradient(135deg, #fff9e8 0%, #fffdf6 52%, #fff6da 100%);
+}
+.faq-enhanced::before {
+  opacity: 0.6;
+  font-size: 11rem;
+  left: 2vw;
+  top: 34px;
+}
+.faq-outline {
+  position: absolute;
+  z-index: 0;
+  inset: 8% -14% auto auto;
+  width: min(72vw, 1180px);
+  color: var(--blue);
+  opacity: 0.055;
+  pointer-events: none;
+  transform: rotate(-4deg);
+}
+.faq-outline svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.faq-outline .tr {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 0.72;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: calc(var(--L) * 0.12px) calc(var(--L) * 0.88px);
+  animation: faqOutlineTravel 22s linear infinite;
+  animation-delay: calc(var(--i, 0) * -1.3s);
+  vector-effect: non-scaling-stroke;
+}
+@keyframes faqOutlineTravel {
+  to {
+    stroke-dashoffset: calc(var(--L) * -1px);
+  }
+}
+.faq-enhanced .faq-grid {
+  position: relative;
+  z-index: 2;
+}
+.faq-enhanced .faq-intro {
+  position: sticky;
+  top: 120px;
+}
+.faq-enhanced .faq-intro h2 {
+  max-width: 530px;
+  font-size: clamp(3.4rem, 6.7vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+.faq-enhanced .accordion {
+  padding: 12px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.44);
+  border: 1px solid rgba(0, 91, 170, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 24px 60px rgba(0, 72, 140, 0.08);
+}
+.faq-enhanced .accordion-item {
+  border-radius: 22px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-enhanced .accordion-item:last-child {
+  margin-bottom: 0;
+}
+.faq-enhanced .accordion-item.open {
+  background: linear-gradient(135deg, var(--blue), #0072bc);
+}
+
+/* 8) Rodapé mais profundo. */
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+      circle at 18% 15%,
+      rgba(0, 114, 188, 0.22),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #005baa 0%, #005baa 55%, #005baa 100%) !important;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 35%, #000 100%);
+}
+.footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --rev-support-height: 215vh;
+  }
+  .animated-brand--header {
+    width: 142px;
+  }
+  .animated-brand--footer {
+    width: 220px;
+  }
+  .news-image--photo img {
+    height: 210px;
+  }
+  .news-image--photo {
+    min-height: 210px;
+  }
+  .support-wipe__panel {
+    padding: 36px 22px;
+  }
+  .support-wipe__panel h2 {
+    font-size: clamp(3.2rem, 16vw, 5.6rem);
+    max-width: 8ch;
+  }
+  .support-wipe .email-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .support-wipe .email-form .btn {
+    width: 100%;
+  }
+  .faq-outline {
+    width: 150vw;
+    right: -62vw;
+    top: 12%;
+    opacity: 0.04;
+  }
+  .faq-enhanced .faq-intro {
+    position: relative;
+    top: auto;
+  }
+  .faq-enhanced .accordion {
+    padding: 8px;
+    border-radius: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proposal-track {
+    cursor: auto;
+  }
+  .animated-brand__draw {
+    display: none;
+  }
+  .animated-brand__lockup {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .support-wipe {
+    height: auto;
+    background: transparent;
+  }
+  .support-wipe__stage {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+  .support-wipe__panel {
+    position: relative;
+    min-height: 56svh;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .support-wipe__panel--second > div {
+    opacity: 1;
+    transform: none;
+  }
+  .faq-outline .tr {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
+/* símbolo 22 entra antes do traçado, como no preloader */
+.animated-brand__symbol {
+  position: absolute;
+  z-index: 3;
+  right: -2%;
+  top: 50%;
+  color: var(--yellow);
+  font-family: "Gotham";
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.09em;
+  opacity: 0;
+  transform: translate3d(0, -50%, 0) scale(0.82);
+  pointer-events: none;
+}
+.animated-brand--header .animated-brand__symbol {
+  font-size: 2rem;
+}
+.animated-brand--footer .animated-brand__symbol {
+  font-size: 3.1rem;
+}
+.animated-brand.is-animating .animated-brand__symbol {
+  animation: revBrandSymbol 0.42s var(--rev-ease) forwards;
+}
+.animated-brand.is-complete .animated-brand__symbol {
+  opacity: 0;
+}
+@keyframes revBrandSymbol {
+  to {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animated-brand__symbol {
+    display: none;
+  }
+}
+
+/* ======================================================================
+   ROUND 3 — ajustes de UX, hero full-height, cues e novas seções visuais.
+   ====================================================================== */
+
+/* 1) HERO com altura real da viewport do usuário. */
+.hero {
+  min-height: 100svh !important;
+  display: flex;
+  align-items: stretch;
+}
+.hero-grid {
+  min-height: calc(100svh - var(--nav-h)) !important;
+}
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-copy p {
+  max-width: 46ch;
+}
+.hero-navigation-note {
+  display: inline-grid;
+  gap: 4px;
+  max-width: 420px;
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  font-size: 0.88rem;
+}
+.hero-navigation-note strong {
+  color: #fff;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* 5) Scroll arrow / instruções entre seções. */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 4;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.scroll-cue--light {
+  color: var(--blue);
+}
+.scroll-cue__arrow {
+  width: 16px;
+  height: 16px;
+  border-right: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: rotate(45deg);
+  animation: scrollCueDrop 2s ease-in-out infinite;
+}
+@keyframes scrollCueDrop {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(45deg) translate(4px, 4px);
+    opacity: 0.38;
+  }
+}
+
+/* 2) Propostas com fotos e mais densidade visual. */
+.proposal-track {
+  grid-auto-columns: minmax(86%, 1fr);
+}
+.proposal-card {
+  grid-template-columns: 1fr;
+}
+.proposal-image--photo {
+  padding: 0;
+  background: #d5dde5;
+}
+.proposal-image--photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.75s var(--rev-ease), filter 0.75s ease;
+}
+.proposal-card:hover .proposal-image--photo img {
+  transform: scale(1.06);
+  filter: saturate(1.03) contrast(1.02);
+}
+
+/* 3) Quem é Flávio — cards mais inteligentes e atraentes. */
+.achievement-badges {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+}
+.achievement--smart {
+  min-height: 174px;
+  padding: 22px 18px 20px;
+  border: 1px solid rgba(0, 91, 170, 0.09);
+  border-top-width: 4px;
+  border-top-color: var(--yellow);
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(246, 250, 253, 0.94)
+    ),
+    radial-gradient(
+      circle at right top,
+      rgba(18, 178, 75, 0.08),
+      transparent 42%
+    );
+  border-radius: 24px;
+}
+.achievement--smart:nth-child(even) {
+  border-top-color: var(--green);
+}
+.achievement--featured {
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(240, 247, 255, 0.96)
+    ),
+    radial-gradient(circle at 80% 18%, rgba(255, 203, 5, 0.16), transparent 35%);
+}
+.achievement-kicker {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(18, 178, 75, 0.1);
+  color: var(--green-deep);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.achievement--smart h3 {
+  margin-bottom: 8px;
+  color: var(--blue-deep);
+  font-size: 1.08rem;
+  line-height: 1.04;
+}
+.achievement--smart p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* 4) Hero-light na seção atuação. */
+.accomplishments::after {
+  content: "";
+  position: absolute;
+  left: -10vw;
+  bottom: -22vw;
+  width: 36vw;
+  height: 36vw;
+  min-width: 240px;
+  min-height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(111, 193, 255, 0.42),
+    rgba(111, 193, 255, 0.12) 38%,
+    transparent 72%
+  );
+  filter: blur(22px);
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+/* 6) FAQ corrigido. */
+.faq-enhanced .faq-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.42fr) minmax(0, 0.58fr);
+  gap: 44px;
+  align-items: start;
+}
+.faq-enhanced .accordion-item.open {
+  transform: none;
+  box-shadow: 0 18px 34px rgba(0, 91, 170, 0.16);
+}
+.faq-enhanced .accordion-button {
+  padding: 22px 58px 22px 20px;
+  font-size: clamp(1rem, 1.15vw, 1.22rem);
+  line-height: 1.35;
+}
+.faq-enhanced .accordion-content {
+  padding: 0 20px 22px;
+  font-size: 0.98rem;
+}
+.faq-share {
+  margin-top: 18px;
+}
+
+/* 7) Depoimentos com fotos reais remotas. */
+.testimonial-photo--image {
+  overflow: hidden;
+  background: #d8dee4;
+}
+.testimonial-photo--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+  transition: transform 0.7s var(--rev-ease), filter 0.7s ease;
+}
+.testimonial-card:hover .testimonial-photo--image img {
+  transform: scale(1.06);
+  filter: saturate(1.02) contrast(1.01);
+}
+
+/* 8) Rodapé com outline animado no fundo. */
+.footer {
+  background: radial-gradient(
+      circle at 18% 15%,
+      rgba(0, 114, 188, 0.18),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #005baa 0%, #005baa 56%, #005baa 100%) !important;
+}
+.footer-outline {
+  position: absolute;
+  inset: auto -8% -12% auto;
+  width: min(1000px, 78vw);
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  opacity: 1;
+  transform: rotate(-6deg);
+}
+.footer-outline svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.footer-outline .tr {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: calc(var(--L) * 0.16px) calc(var(--L) * 0.84px);
+  animation: footerOutlineTravel 26s linear infinite;
+  vector-effect: non-scaling-stroke;
+}
+@keyframes footerOutlineTravel {
+  to {
+    stroke-dashoffset: calc(var(--L) * -1px);
+  }
+}
+
+/* Melhor leitura do bloco de atuações em telas grandes. */
+@media (min-width: 900px) {
+  .proposal-card {
+    grid-template-columns: minmax(300px, 0.96fr) minmax(300px, 1.04fr);
+    min-height: 430px;
+  }
+  .proposal-image--photo img {
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 1120px) {
+  .achievement-badges {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-navigation-note {
+    max-width: 100%;
+  }
+  .achievement-badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .faq-enhanced .faq-grid {
+    grid-template-columns: 1fr;
+  }
+  .faq-enhanced .faq-intro {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .scroll-cue {
+    position: static;
+    transform: none;
+    margin: 20px auto 0;
+    color: currentColor;
+  }
+  .hero .scroll-cue {
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .proposal-track {
+    grid-auto-columns: minmax(92%, 1fr);
+  }
+  .achievement-badges {
+    grid-template-columns: 1fr;
+  }
+  .achievement--smart {
+    min-height: 0;
+  }
+  .footer-outline {
+    width: 150vw;
+    right: -65vw;
+    bottom: -6%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__arrow {
+    animation: none;
+  }
+  .footer-outline .tr,
+  .faq-outline .tr {
+    animation: none !important;
+  }
+}
+
+.news-body h3 {
+  text-wrap: balance;
+}

@@ -1,0 +1,511 @@
+/* Hero final da home, baseado nas artes oficiais desktop e mobile. */
+.home-page .hero-static--campaign {
+  position: relative !important;
+  isolation: isolate;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: clamp(
+    620px,
+    calc(100svh - var(--site-header-total, 120px)),
+    830px
+  ) !important;
+  min-height: 620px !important;
+  max-height: 830px !important;
+  margin-top: var(--site-header-total, 120px) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  color: #fff;
+  background: #00488d !important;
+}
+
+.home-page .hero-static--campaign .hero-static__media {
+  position: absolute !important;
+  z-index: 0;
+  inset: 0 !important;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden;
+  translate: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__media::after {
+  display: none !important;
+  content: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__media picture,
+.home-page .hero-static--campaign .hero-static__media img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.home-page .hero-static--campaign .hero-static__media img {
+  object-fit: cover !important;
+  object-position: center center !important;
+  scale: 1 !important;
+  transform: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__layout {
+  position: relative !important;
+  z-index: 2;
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 clamp(48px, 7vw, 140px) !important;
+  align-items: center !important;
+}
+
+.home-page .hero-static--campaign .hero-static__copy {
+  display: block !important;
+  box-sizing: border-box !important;
+  grid-column: auto !important;
+  width: min(46vw, 720px) !important;
+  max-width: 720px !important;
+  margin: 0 !important;
+  padding: 24px 0 30px !important;
+  color: #fff !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  translate: none !important;
+  transform: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__headline {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+.home-page .hero-static--campaign .hero-static__kicker {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0 clamp(12px, 2vh, 22px) !important;
+  color: #ffcb05 !important;
+  font-size: clamp(0.72rem, 0.86vw, 0.95rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap;
+}
+
+.home-page .hero-static--campaign .hero-static__kicker::before {
+  display: none !important;
+  content: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__kicker img {
+  width: clamp(17px, 1.25vw, 24px);
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.home-page .hero-static--campaign #heroTitle {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: inherit !important;
+  font-weight: 900 !important;
+  line-height: 0.82 !important;
+  letter-spacing: -0.075em !important;
+  text-wrap: nowrap;
+}
+
+.home-page .hero-static--campaign #heroTitle .hero-title__line1 {
+  display: block !important;
+  color: #fff !important;
+  font-size: clamp(4.2rem, 5.25vw, 6.4rem) !important;
+  line-height: 0.9 !important;
+  white-space: nowrap !important;
+}
+
+.home-page .hero-static--campaign #heroTitle .hero-title__accent {
+  display: block !important;
+  width: max-content !important;
+  margin: -0.08em 0 0 !important;
+  padding: 0 !important;
+  color: #ffcb05 !important;
+  background: transparent !important;
+  font-size: clamp(7rem, 10.8vw, 13rem) !important;
+  line-height: 0.78 !important;
+  letter-spacing: -0.085em !important;
+  text-transform: lowercase !important;
+  white-space: nowrap !important;
+}
+
+.home-page .cookie-manage {
+  right: auto !important;
+  left: 50% !important;
+  white-space: nowrap;
+  transform: translateX(-50%) !important;
+}
+
+.home-page .hero-static--campaign .hero-static__copy > p {
+  display: block !important;
+  width: max-content !important;
+  max-width: 100%;
+  margin: clamp(14px, 2.2vh, 24px) 0 0 !important;
+  padding: 0.16em 0.55em !important;
+  color: #fff !important;
+  background: #07884f !important;
+  font-size: clamp(1.1rem, 2vw, 2rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.035em;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__actions {
+  display: flex !important;
+  width: min(100%, 430px) !important;
+  margin: clamp(26px, 4vh, 42px) 0 0 !important;
+  align-items: stretch !important;
+  flex-direction: column !important;
+  gap: 11px !important;
+}
+
+.home-page .hero-static--campaign .hero-whatsapp-note {
+  max-width: 46ch !important;
+  margin: 0 0 5px !important;
+  color: #fff !important;
+  font-size: clamp(0.68rem, 0.72vw, 0.78rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.38 !important;
+  text-align: left !important;
+  opacity: 0.96;
+}
+
+.home-page .hero-static--campaign .hero-static__primary {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 56px !important;
+  padding: 10px 28px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+  border: 2px solid #ffcb05 !important;
+  border-radius: 999px !important;
+  color: #075a36 !important;
+  background: #ffcb05 !important;
+  box-shadow: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__primary::before,
+.home-page .hero-static--campaign .hero-static__primary::after {
+  display: none !important;
+  content: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__primary img {
+  display: block;
+  width: min(82%, 310px);
+  height: auto;
+}
+
+.home-page .hero-static--campaign .hero-static__primary-arrow {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.home-page .hero-static--campaign .hero-static__donate {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 10px 20px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid rgba(255, 255, 255, 0.92) !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: transparent !important;
+  font-size: clamp(0.78rem, 0.9vw, 0.98rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  text-decoration: none !important;
+}
+
+.home-page .hero-static--campaign .hero-static__primary:hover,
+.home-page .hero-static--campaign .hero-static__primary:focus-visible,
+.home-page .hero-static--campaign .hero-static__donate:hover,
+.home-page .hero-static--campaign .hero-static__donate:focus-visible {
+  filter: brightness(1.06);
+  transform: translateY(-2px) !important;
+}
+
+/* O botão funcional de acessibilidade usa o ícone entregue com o novo hero. */
+.home-page .a11y-fab {
+  min-height: 54px;
+  padding: 10px 19px 10px 14px;
+  gap: 10px;
+  color: #fff;
+  background: #00488d;
+  transform: none !important;
+}
+.home-page .a11y-fab::before {
+  display: none;
+  content: none;
+}
+.home-page .a11y-fab::after {
+  width: 27px;
+  height: 33px;
+  flex: 0 0 27px;
+  content: "";
+  background: url("/assets/home-hero-v2/acessibilidade.webp") center/contain
+    no-repeat;
+}
+.home-page .a11y-fab svg {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .home-page .hero-static--campaign {
+    --hero-mobile-background: linear-gradient(
+      110deg,
+      #00396f 0%,
+      #005baa 55%,
+      #0877c2 100%
+    );
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: calc(100svh - var(--site-header-total, 116px)) !important;
+    max-height: none !important;
+    margin-top: var(--site-header-total, 116px) !important;
+    overflow: hidden !important;
+    background: var(--hero-mobile-background) !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__media {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: calc(100vw * 583 / 1200);
+    flex: 1 1 auto;
+    aspect-ratio: 1200/583;
+    overflow: hidden !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__media picture,
+  .home-page .hero-static--campaign .hero-static__media img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__media img {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__layout {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    flex: 0 0 auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--hero-mobile-background);
+  }
+
+  .home-page .hero-static--campaign .hero-static__copy {
+    display: flex !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: clamp(25px, 7vw, 38px) 18px
+      calc(86px + env(safe-area-inset-bottom, 0px)) !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__headline {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__kicker {
+    justify-content: center;
+    width: 100%;
+    margin: 0 0 12px !important;
+    font-size: clamp(0.68rem, 3vw, 0.82rem) !important;
+    white-space: normal;
+  }
+
+  .home-page .hero-static--campaign .hero-static__kicker img {
+    width: 20px;
+  }
+
+  .home-page .hero-static--campaign #heroTitle {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .home-page .hero-static--campaign #heroTitle .hero-title__line1 {
+    font-size: clamp(2.75rem, 12.5vw, 4rem) !important;
+    line-height: 0.92 !important;
+  }
+
+  .home-page .hero-static--campaign #heroTitle .hero-title__accent {
+    width: 100% !important;
+    margin-top: -0.1em !important;
+    font-size: clamp(5rem, 21vw, 7rem) !important;
+    line-height: 0.8 !important;
+    text-align: center;
+  }
+
+  .home-page .hero-static--campaign .hero-static__copy > p {
+    width: max-content !important;
+    max-width: 100%;
+    margin: 16px auto 0 !important;
+    padding: 0.18em 0.5em !important;
+    font-size: clamp(1.25rem, 5.8vw, 1.75rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__actions {
+    width: min(100%, 580px) !important;
+    margin: clamp(24px, 6vw, 34px) auto 0 !important;
+    gap: 10px !important;
+  }
+
+  .home-page .hero-static--campaign .hero-whatsapp-note {
+    max-width: 100% !important;
+    margin: 0 0 5px !important;
+    font-size: clamp(0.68rem, 2.75vw, 0.78rem) !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__primary {
+    min-height: 54px !important;
+    padding: 9px 18px !important;
+  }
+
+  .home-page .hero-static--campaign .hero-static__primary img {
+    width: min(78%, 300px);
+  }
+
+  .home-page .hero-static--campaign .hero-static__primary-arrow {
+    font-size: 1.8rem;
+  }
+
+  .home-page .hero-static--campaign .hero-static__donate {
+    min-height: 50px !important;
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem) !important;
+  }
+
+  .home-page .a11y-fab {
+    top: 50svh;
+    width: 58px;
+    min-height: 58px;
+    padding: 10px 14px;
+    justify-content: center;
+    border-radius: 18px 0 0 18px;
+    transform: none !important;
+  }
+  .home-page .a11y-fab::after {
+    width: 27px;
+    height: 34px;
+    flex-basis: 27px;
+  }
+  .home-page .a11y-fab__label {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-page .hero-static--campaign .hero-static__copy {
+    padding-inline: 14px !important;
+  }
+  .home-page .hero-static--campaign .hero-static__kicker {
+    font-size: 0.63rem !important;
+  }
+  .home-page .hero-static--campaign .hero-static__copy > p {
+    font-size: 1.12rem !important;
+  }
+}
+
+/* Hero WhatsApp Button - Crisp Typography & Vector Layout */
+.hero-zap-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 56px !important;
+  padding: 12px 28px !important;
+  border-radius: 999px !important;
+  background: #ffcb05 !important;
+  color: #015F34 !important;
+  border: 2px solid #ffcb05 !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 24px rgba(0, 63, 125, 0.22) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+  cursor: pointer;
+}
+
+.hero-zap-button:hover,
+.hero-zap-button:focus-visible {
+  filter: brightness(1.06) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(0, 63, 125, 0.32) !important;
+}
+
+.hero-zap-button__arrow {
+  display: inline-block !important;
+  font-size: 1.4rem !important;
+  line-height: 1 !important;
+  color: #015F34 !important;
+  transition: transform 0.22s ease !important;
+}
+
+.hero-zap-button:hover .hero-zap-button__arrow {
+  transform: translateX(4px) !important;
+}
+
+.hero-zap-button__text {
+  font-family: Gotham, system-ui, -apple-system, sans-serif !important;
+  font-size: clamp(1rem, 1.4vw, 1.15rem) !important;
+  font-weight: 700 !important;
+  color: #015F34 !important;
+  letter-spacing: -0.01em !important;
+  white-space: nowrap !important;
+}
+
+.hero-zap-button__text strong {
+  font-weight: 900 !important;
+  color: #015F34 !important;
+}
+
+.hero-zap-button__icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #015F34 !important;
+}
+
+.hero-zap-button__icon svg {
+  width: 26px !important;
+  height: 26px !important;
+  fill: #015F34 !important;
+}

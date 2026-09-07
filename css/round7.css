@@ -1,0 +1,873 @@
+/* ======================================================================
+   ROUND 7 — impacto editorial com controle de textura
+   - marquee realmente contínua
+   - propostas contemporâneas e planas
+   - notícias de impacto / sem cartões “fofos”
+   - Fake News escura, editorial e texturizada apenas onde faz sentido
+   - FAQ reestruturado visualmente
+   - Principais realizações com superfícies de vidro
+   - header limpo e hero sem divisor inferior
+   ====================================================================== */
+
+:root {
+  --r7-charcoal: #0a0b0c;
+  --r7-charcoal-2: #111417;
+  --r7-cream: #eee9df;
+  --r7-red: #e52b28;
+  --r7-line: rgba(0, 91, 170, 0.12);
+}
+
+/* ----------------------------------------------------------------------
+   01 / HEADER + HERO — retirar textura e divisor inferior
+   ---------------------------------------------------------------------- */
+.site-header,
+.site-header.is-scrolled {
+  background-image: none !important;
+  background-color: var(--green) !important;
+}
+
+/* A faixa superior do header pode permanecer como assinatura; a divisão
+   inferior do hero é removida por marcação e protegida aqui contra cache. */
+.hero-exit-divider {
+  display: none !important;
+}
+
+/* ----------------------------------------------------------------------
+   02 / TEXTURAS — redução global da Round 6
+   ---------------------------------------------------------------------- */
+.proposals,
+.numbers,
+.testimonials,
+.footer,
+.support-wipe__panel--first,
+.support-wipe__panel--second,
+.support-box:first-child,
+.support-box + .support-box {
+  background-image: none !important;
+}
+
+.numbers {
+  background-color: #fff !important;
+}
+
+.support-wipe__panel--first,
+.support-box:first-child {
+  background-color: var(--blue) !important;
+}
+.support-wipe__panel--second,
+.support-box + .support-box {
+  background-color: var(--green) !important;
+}
+
+.footer {
+  background-image: radial-gradient(
+      circle at 16% 28%,
+      rgba(0, 180, 157, 0.12),
+      transparent 24%
+    ),
+    radial-gradient(circle at 86% 64%, rgba(255, 203, 5, 0.09), transparent 20%),
+    linear-gradient(135deg, #005baa 0%, #005baa 52%, #005baa 100%) !important;
+}
+
+/* ----------------------------------------------------------------------
+   03 / PROPOSTAS — poster editorial contemporâneo, 2D e sem bloco maciço
+   ---------------------------------------------------------------------- */
+.proposals {
+  background-color: #f5f8fa !important;
+  isolation: isolate;
+}
+
+.proposals::after {
+  width: clamp(50px, 4.5vw, 76px) !important;
+  height: clamp(210px, 22vw, 360px) !important;
+  opacity: 0.13 !important;
+}
+
+.proposal-stage::before {
+  height: 3px !important;
+  top: 10px !important;
+  opacity: 1 !important;
+}
+
+.proposal-track {
+  grid-auto-columns: minmax(780px, 76vw) !important;
+  gap: clamp(18px, 1.4vw, 26px) !important;
+  padding-top: 36px !important;
+}
+
+.proposal-card,
+.proposal-card:nth-child(n) {
+  --r7-card-accent: var(--green);
+  min-height: clamp(430px, 29vw, 520px) !important;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.14fr) !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(0, 91, 170, 0.12) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.proposal-card:nth-child(2) {
+  --r7-card-accent: var(--blue-2);
+}
+.proposal-card:nth-child(3) {
+  --r7-card-accent: var(--orange);
+}
+.proposal-card:nth-child(4) {
+  --r7-card-accent: var(--blue);
+}
+.proposal-card:nth-child(5) {
+  --r7-card-accent: #00b49d;
+}
+
+.proposal-card:hover,
+.proposal-card:nth-child(n):hover {
+  border-color: color-mix(
+    in srgb,
+    var(--r7-card-accent) 55%,
+    transparent
+  ) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.proposal-card::before {
+  z-index: 7;
+  top: 22px;
+  right: 24px;
+  color: var(--r7-card-accent) !important;
+  font-size: clamp(1rem, 1.15vw, 1.2rem) !important;
+}
+
+.proposal-card::after {
+  content: "";
+  position: absolute;
+  z-index: 7;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: var(--r7-card-accent);
+  pointer-events: none;
+}
+
+.proposal-copy,
+.proposal-card:nth-child(n) .proposal-copy {
+  position: relative;
+  padding: clamp(38px, 3.6vw, 60px) !important;
+  background: #fff !important;
+  background-image: none !important;
+  color: var(--ink) !important;
+}
+
+.proposal-copy::before {
+  content: "";
+  width: 58px;
+  height: 8px;
+  margin-bottom: 26px;
+  background: var(--r7-card-accent);
+}
+
+.proposal-copy .category {
+  max-width: 11ch;
+  color: var(--blue-deep) !important;
+  font-size: clamp(2.7rem, 4vw, 4.9rem) !important;
+  line-height: 0.88 !important;
+  letter-spacing: -0.055em;
+}
+
+.proposal-copy .topic {
+  margin-top: 14px !important;
+  color: var(--r7-card-accent) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.14em !important;
+}
+
+.proposal-copy p {
+  max-width: 40ch;
+  margin-top: 25px !important;
+  color: #586a79 !important;
+  font-family: "Gotham", sans-serif !important;
+  font-style: normal !important;
+}
+
+.proposal-copy .btn {
+  border-color: var(--blue-deep) !important;
+  color: var(--blue-deep) !important;
+  background: transparent !important;
+}
+
+.proposal-image {
+  min-height: 100% !important;
+  background: #e6edf2 !important;
+}
+
+.proposal-image::after {
+  display: none !important;
+}
+
+.proposal-image--photo img {
+  filter: none !important;
+  object-fit: cover !important;
+  transform: none !important;
+}
+
+/* Alternância visual sem perspectiva: a segunda e quarta peças invertem
+   texto/imagem e criam ritmo editorial. */
+.proposal-card:nth-child(even) .proposal-copy {
+  order: 2;
+}
+.proposal-card:nth-child(even) .proposal-image {
+  order: 1;
+}
+.proposal-card:nth-child(even)::after {
+  left: auto;
+  right: 0;
+}
+
+/* ----------------------------------------------------------------------
+   04 / PRINCIPAIS REALIZAÇÕES — glass consistente com o rodapé
+   ---------------------------------------------------------------------- */
+.accomplishments {
+  background: radial-gradient(
+      circle at 14% 12%,
+      rgba(0, 180, 157, 0.17),
+      transparent 30%
+    ),
+    radial-gradient(circle at 88% 78%, rgba(255, 203, 5, 0.12), transparent 28%),
+    linear-gradient(135deg, #005baa 0%, #005baa 48%, #0072bc 100%) !important;
+}
+
+.accomplishments::before {
+  opacity: 0.035 !important;
+}
+
+.accomplishments-grid {
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr) !important;
+  gap: clamp(34px, 5vw, 84px) !important;
+}
+
+.accomplishments .intro {
+  position: sticky;
+  top: 120px;
+  padding: clamp(26px, 3vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  background: rgba(0, 47, 90, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 30px 80px rgba(0, 24, 48, 0.12);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+.accomplishments .accordion {
+  gap: 14px !important;
+}
+
+.accomplishments .accordion-item,
+.accomplishments .accordion-item.open {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 22px !important;
+  color: #fff !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.13),
+    rgba(255, 255, 255, 0.055)
+  ) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 50px rgba(0, 25, 48, 0.13) !important;
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  transform: none !important;
+}
+
+.accomplishments .accordion-item::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  opacity: 0.55;
+}
+
+.accomplishments .accordion-item.open {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+}
+
+.accomplishments .accordion-button {
+  padding: 20px 60px 20px 24px !important;
+  color: #fff !important;
+}
+
+.accomplishments .accordion-content,
+.accomplishments .accordion-item:not(.open) .accordion-content {
+  padding-inline: 24px !important;
+  color: rgba(255, 255, 255, 0.77) !important;
+}
+
+.accomplishments .accordion-button::after,
+.accomplishments .accordion-item.open .accordion-button::after {
+  color: var(--yellow) !important;
+}
+
+/* ----------------------------------------------------------------------
+   05 / NOTÍCIAS — blocos chapados, manchete e cor sólida
+   ---------------------------------------------------------------------- */
+.news {
+  background: #f3f6f8 !important;
+}
+
+.news > .container {
+  width: 100% !important;
+  max-width: none !important;
+  padding-inline: var(--r5-page-pad) !important;
+}
+
+.news-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(12px, 1.25vw, 22px) !important;
+  align-items: stretch !important;
+}
+
+.news-card,
+.news-card:nth-child(2),
+.news-card:first-child {
+  --r7-news-bg: var(--blue-deep);
+  --r7-news-fg: #fff;
+  --r7-news-muted: rgba(255, 255, 255, 0.72);
+  --r7-news-accent: var(--yellow);
+  display: grid !important;
+  grid-template-rows: clamp(230px, 18vw, 330px) 1fr !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: var(--r7-news-bg) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow: hidden !important;
+}
+
+.news-card:nth-child(2) {
+  --r7-news-bg: #079c43;
+  --r7-news-accent: #fff;
+}
+
+.news-card:nth-child(3) {
+  --r7-news-bg: #ffcb05;
+  --r7-news-fg: #005baa;
+  --r7-news-muted: rgba(0, 63, 120, 0.72);
+  --r7-news-accent: #005baa;
+}
+
+.news-card::before {
+  width: 100% !important;
+  height: 8px !important;
+  top: 0 !important;
+  bottom: auto !important;
+  background: var(--r7-news-accent) !important;
+}
+
+.news-card::after {
+  content: "→";
+  position: absolute;
+  z-index: 7;
+  right: 22px;
+  bottom: 18px;
+  color: var(--r7-news-accent);
+  font: 900 1.35rem/1 "Gotham";
+}
+
+.news-card:hover,
+.news-card:nth-child(2):hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.news-image--photo,
+.news-image--photo img,
+.news-card:first-child .news-image--photo,
+.news-card:first-child .news-image--photo img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  border-radius: 0 !important;
+}
+
+.news-image::after {
+  display: none !important;
+}
+
+.news-body,
+.news-card:first-child .news-body {
+  position: relative;
+  min-height: 280px;
+  padding: clamp(24px, 2.4vw, 40px) !important;
+  padding-bottom: 64px !important;
+  background: var(--r7-news-bg) !important;
+  color: var(--r7-news-fg) !important;
+}
+
+.news-date,
+.news-card p {
+  color: var(--r7-news-muted) !important;
+}
+
+.news-card h3,
+.news-card:first-child h3 {
+  max-width: 16ch;
+  color: var(--r7-news-fg) !important;
+  font-size: clamp(1.35rem, 1.8vw, 2.05rem) !important;
+  line-height: 1 !important;
+}
+
+.news-card .btn {
+  min-height: 0 !important;
+  padding: 0 0 4px !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--r7-news-accent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--r7-news-fg) !important;
+}
+
+.news-badge {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ----------------------------------------------------------------------
+   06 / FAKE NEWS — carvão, grain e linguagem editorial “rasgada”
+   ---------------------------------------------------------------------- */
+.fake-news {
+  position: relative;
+  padding: clamp(130px, 9vw, 170px) 0 clamp(120px, 9vw, 170px) !important;
+  color: #fff;
+  background: var(--r7-charcoal) !important;
+  background-image: none !important;
+  overflow: hidden;
+}
+
+.fake-news::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 64px;
+  background: url("/assets/r7-torn-strip.svg") center top / 100% 64px repeat-x;
+  transform: rotate(180deg);
+  opacity: 0.96;
+  pointer-events: none;
+}
+
+.fake-news::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: url("/assets/r7-grain.svg") repeat,
+    linear-gradient(
+      108deg,
+      transparent 0 14%,
+      rgba(229, 43, 40, 0.09) 14% 14.2%,
+      transparent 14.2% 100%
+    ),
+    radial-gradient(circle at 82% 16%, rgba(236, 145, 7, 0.16), transparent 22%);
+  background-size: 260px 260px, auto, auto;
+  mix-blend-mode: screen;
+  opacity: 0.52;
+  pointer-events: none;
+}
+
+.fake-news > .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  padding-inline: var(--r5-page-pad);
+}
+
+.fake-news .section-head {
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(238, 233, 223, 0.24);
+}
+
+.fake-news .section-head h2 {
+  max-width: 10ch;
+  color: var(--r7-cream) !important;
+  font-size: clamp(3.4rem, 7vw, 7.8rem) !important;
+  letter-spacing: -0.06em;
+}
+
+.fake-news .section-head h2::after {
+  content: "";
+  display: inline-block;
+  width: 0.28em;
+  height: 0.28em;
+  margin-left: 0.08em;
+  background: var(--r7-red);
+  transform: translateY(-0.08em) rotate(8deg);
+}
+
+.fake-news .link {
+  color: var(--r7-cream) !important;
+}
+
+.fake-grid {
+  margin-top: 34px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 1px !important;
+  background: rgba(238, 233, 223, 0.22);
+  border: 1px solid rgba(238, 233, 223, 0.18);
+}
+
+.fake-card,
+.fake-card:nth-child(even) {
+  min-height: 390px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-top: 0 !important;
+  background: rgba(16, 19, 21, 0.92) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: background 0.25s ease !important;
+}
+
+.fake-card:nth-child(even) {
+  background: rgba(22, 25, 28, 0.94) !important;
+}
+.fake-card:hover {
+  background: #1b1e21 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.fake-card::before {
+  content: "VERIFICAÇÃO";
+  display: block;
+  align-self: flex-start;
+  margin: 26px 26px 0;
+  padding: 6px 8px 5px;
+  background: var(--r7-red);
+  color: #fff;
+  font: 800 0.62rem/1 "Gotham";
+  letter-spacing: 0.13em;
+}
+
+.fake-card:nth-child(even)::before {
+  background: #ec9107;
+  color: #111;
+}
+
+.fake-body {
+  padding: 22px 26px 30px !important;
+}
+
+.fake-body h3 {
+  color: var(--r7-cream) !important;
+  font-size: clamp(1.35rem, 1.45vw, 1.75rem) !important;
+  line-height: 1 !important;
+}
+
+.fake-body p {
+  margin-top: 18px;
+  color: rgba(238, 233, 223, 0.67) !important;
+  line-height: 1.6;
+}
+
+.share-bar {
+  border-top: 1px solid rgba(238, 233, 223, 0.16);
+  background: transparent !important;
+  color: rgba(238, 233, 223, 0.76) !important;
+}
+
+.fake-news .scroll-cue {
+  color: rgba(238, 233, 223, 0.82) !important;
+}
+
+/* ----------------------------------------------------------------------
+   07 / FAQ — institucional, mais gráfico e com hierarquia clara
+   ---------------------------------------------------------------------- */
+.faq {
+  padding: clamp(110px, 8vw, 150px) 0 !important;
+  background: #f4f7f8 !important;
+}
+
+.faq::before {
+  content: "FAQ" !important;
+  left: auto !important;
+  right: -1vw !important;
+  top: 28px !important;
+  color: rgba(0, 91, 170, 0.045) !important;
+  font-family: "Gotham", sans-serif;
+  font-size: clamp(9rem, 23vw, 24rem) !important;
+  letter-spacing: -0.08em;
+}
+
+.faq-outline {
+  display: none !important;
+}
+
+.faq-grid {
+  grid-template-columns: minmax(270px, 0.7fr) minmax(0, 1.3fr) !important;
+  gap: clamp(40px, 6vw, 96px) !important;
+}
+
+.faq-intro {
+  position: sticky;
+  top: 118px;
+  padding-top: 22px;
+  border-top: 10px solid var(--green);
+}
+
+.faq-intro::before {
+  content: "PERGUNTAS / RESPOSTAS";
+  display: inline-block;
+  margin-bottom: 22px;
+  padding: 7px 9px 6px;
+  background: var(--yellow);
+  color: var(--blue-deep);
+  font: 800 0.64rem/1 "Gotham";
+  letter-spacing: 0.13em;
+}
+
+.faq-intro h2 {
+  font-size: clamp(3.2rem, 5vw, 5.9rem) !important;
+  line-height: 0.88 !important;
+}
+
+.faq .accordion {
+  counter-reset: r7faq;
+  gap: 0 !important;
+  border-top: 1px solid rgba(0, 91, 170, 0.18);
+}
+
+.faq .accordion-item,
+.faq .accordion-item.open {
+  counter-increment: r7faq;
+  position: relative;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(0, 91, 170, 0.18) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.faq .accordion-button {
+  min-height: 88px;
+  padding: 24px 66px 24px 70px !important;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+}
+
+.faq .accordion-button::before {
+  content: counter(r7faq, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--green);
+  font: 900 0.78rem/1 "Gotham";
+  letter-spacing: 0.08em;
+}
+
+.faq .accordion-button::after {
+  right: 4px !important;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff !important;
+  line-height: 1;
+}
+
+.faq .accordion-item.open .accordion-button {
+  color: var(--blue-deep) !important;
+}
+
+.faq .accordion-item.open .accordion-button::after {
+  background: var(--blue-deep);
+  color: var(--yellow) !important;
+}
+
+.faq .accordion-item.open .accordion-content,
+.faq .accordion-content {
+  padding: 0 66px 30px 70px !important;
+  color: #60717f !important;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.faq-share {
+  border-radius: 0 !important;
+  background: var(--blue-deep) !important;
+  color: #fff !important;
+}
+
+/* ----------------------------------------------------------------------
+   08 / FOOTER MARQUEE — dois grupos idênticos = ciclo sem emenda
+   ---------------------------------------------------------------------- */
+.footer-marquee__track {
+  display: flex !important;
+  gap: 0 !important;
+  width: max-content !important;
+  padding: 0 !important;
+  animation: r7FooterMarquee 32s linear infinite !important;
+  will-change: transform;
+}
+
+.footer-marquee__group {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding: 18px 34px 16px 0;
+  white-space: nowrap;
+}
+
+.footer-marquee__group span {
+  flex: none;
+  color: rgba(255, 255, 255, 0.92);
+  font: 900 clamp(1rem, 1.3vw, 1.35rem) / 1 "Gotham";
+  letter-spacing: 0.08em;
+}
+
+@keyframes r7FooterMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ----------------------------------------------------------------------
+   RESPONSIVIDADE
+   ---------------------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .proposal-track {
+    grid-auto-columns: minmax(690px, 84vw) !important;
+  }
+  .news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .news-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  .fake-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .accomplishments-grid,
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .accomplishments .intro,
+  .faq-intro {
+    position: relative;
+    top: auto;
+  }
+
+  .proposal-track {
+    grid-auto-columns: minmax(560px, 88vw) !important;
+  }
+  .proposal-card,
+  .proposal-card:nth-child(n) {
+    grid-template-columns: minmax(240px, 0.88fr) minmax(0, 1.12fr) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .proposal-track {
+    grid-auto-columns: 90vw !important;
+  }
+  .proposal-card,
+  .proposal-card:nth-child(n) {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 250px !important;
+    border-radius: 14px !important;
+  }
+  .proposal-card:nth-child(even) .proposal-copy {
+    order: 1;
+  }
+  .proposal-card:nth-child(even) .proposal-image {
+    order: 2;
+  }
+  .proposal-card:nth-child(even)::after {
+    left: 0;
+    right: auto;
+  }
+  .proposal-copy {
+    min-height: 0 !important;
+    padding: 30px !important;
+  }
+  .proposal-copy .category {
+    font-size: clamp(2.5rem, 12vw, 3.75rem) !important;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .news-card:nth-child(3) {
+    grid-column: auto;
+  }
+  .news-card,
+  .news-card:nth-child(2),
+  .news-card:first-child {
+    grid-template-rows: 220px 1fr !important;
+  }
+  .news-body,
+  .news-card:first-child .news-body {
+    min-height: 250px;
+  }
+
+  .fake-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .fake-card,
+  .fake-card:nth-child(even) {
+    min-height: 330px !important;
+  }
+
+  .faq .accordion-button {
+    padding-left: 48px !important;
+    padding-right: 52px !important;
+  }
+  .faq .accordion-content,
+  .faq .accordion-item.open .accordion-content {
+    padding-left: 48px !important;
+    padding-right: 20px !important;
+  }
+
+  .footer-marquee__group {
+    gap: 26px;
+    padding-right: 26px;
+  }
+  .footer-marquee__track {
+    animation-duration: 24s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-marquee__track {
+    animation-duration: 80s !important;
+  }
+}

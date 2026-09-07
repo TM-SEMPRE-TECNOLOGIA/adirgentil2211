@@ -1,0 +1,230 @@
+/* ======================================================================
+   ROUND 10 — hero sem clipping + navegação lateral + notícias 5-up
+   ====================================================================== */
+
+/* 01 / HERO — garantir o nome completo sem cortar o último glifo */
+.hero-grid,
+.hero-copy,
+.hero h1,
+.hero h1 span {
+  overflow: visible !important;
+}
+
+.hero-copy {
+  max-width: none !important;
+  min-width: 0 !important;
+  padding-right: clamp(12px, 1.2vw, 24px) !important;
+}
+
+.hero h1 {
+  width: fit-content !important;
+  max-width: none !important;
+  padding-right: 0.16em !important;
+  font-size: clamp(4rem, 5.95vw, 6.8rem) !important;
+  letter-spacing: -0.06em !important;
+  text-wrap: nowrap !important;
+}
+
+.hero h1 span {
+  width: max-content !important;
+  max-width: none !important;
+  padding-right: 0.12em !important;
+  white-space: nowrap !important;
+}
+
+/* 02 / PROPOSTAS — setas laterais reais de navegação */
+.proposal-stage {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.proposal-nav {
+  position: absolute;
+  z-index: 30;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 50%;
+  background: rgba(5, 42, 71, 0.86);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0, 31, 58, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.proposal-nav:hover {
+  background: var(--green);
+  border-color: var(--green);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.proposal-nav span {
+  font: 700 1.45rem/1 "Gotham", sans-serif;
+  transform: translateY(-1px);
+}
+
+.proposal-nav--prev {
+  left: clamp(-20px, -1.5vw, -8px);
+}
+.proposal-nav--next {
+  right: clamp(-20px, -1.5vw, -8px);
+}
+
+/* 03 / NOTÍCIAS — cinco posters na mesma linha + degradê de leitura reforçado */
+.news > .container {
+  padding-inline: clamp(22px, 2.2vw, 48px) !important;
+}
+
+.news-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 0.95vw, 18px) !important;
+}
+
+.news-card,
+.news-card:first-child,
+.news-card:nth-child(n) {
+  min-height: clamp(500px, 33vw, 650px) !important;
+  border-radius: 14px !important;
+}
+
+.news-image::after {
+  background: linear-gradient(
+    to top,
+    rgba(1, 14, 25, 1) 0%,
+    rgba(2, 19, 33, 0.98) 22%,
+    rgba(3, 25, 43, 0.9) 42%,
+    rgba(3, 29, 49, 0.48) 64%,
+    rgba(2, 18, 31, 0.1) 86%,
+    rgba(2, 18, 31, 0.04) 100%
+  ) !important;
+}
+
+.news-body,
+.news-card:first-child .news-body {
+  padding: clamp(20px, 1.6vw, 30px) !important;
+  padding-top: 110px !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.42);
+}
+
+.news-card h3,
+.news-card:first-child h3 {
+  max-width: 100% !important;
+  font-size: clamp(1.16rem, 1.35vw, 1.65rem) !important;
+  line-height: 1.01 !important;
+}
+
+.news-card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 11px !important;
+  font-size: clamp(0.74rem, 0.68vw, 0.86rem) !important;
+  line-height: 1.45 !important;
+}
+
+.news-card .btn {
+  min-height: 38px !important;
+  margin-top: 14px !important;
+  padding-inline: 14px !important;
+  font-size: 0.75rem !important;
+}
+
+.news-date {
+  margin-bottom: 9px !important;
+}
+.news-badge {
+  top: 14px !important;
+  left: 14px !important;
+  font-size: 0.62rem !important;
+}
+.news-card::before {
+  top: 15px !important;
+  right: 14px !important;
+  font-size: 0.98rem !important;
+}
+.news-credit {
+  font-size: 0.52rem !important;
+  max-width: 72% !important;
+}
+
+@media (max-width: 1450px) {
+  .news-grid {
+    grid-template-columns: repeat(5, minmax(205px, 1fr)) !important;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+    padding-bottom: 10px;
+  }
+  .news-card {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 1050px) {
+  .hero h1 {
+    font-size: clamp(3.5rem, 6.1vw, 5.35rem) !important;
+  }
+  .proposal-nav {
+    width: 48px;
+    height: 48px;
+  }
+  .proposal-nav--prev {
+    left: 8px;
+  }
+  .proposal-nav--next {
+    right: 8px;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero h1 {
+    width: auto !important;
+    max-width: 100% !important;
+    font-size: clamp(3rem, 11vw, 4.8rem) !important;
+    text-wrap: balance !important;
+  }
+  .hero h1 span {
+    width: auto !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+  .proposal-nav {
+    width: 44px;
+    height: 44px;
+  }
+  .news-grid {
+    grid-template-columns: repeat(5, minmax(270px, 78vw)) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-copy {
+    padding-right: 0 !important;
+  }
+  .hero h1 {
+    font-size: clamp(2.85rem, 13.5vw, 4.1rem) !important;
+    padding-right: 0.1em !important;
+  }
+  .proposal-nav {
+    top: 47%;
+    width: 40px;
+    height: 40px;
+    background: rgba(5, 42, 71, 0.9);
+  }
+  .proposal-nav--prev {
+    left: 6px;
+  }
+  .proposal-nav--next {
+    right: 6px;
+  }
+  .news-grid {
+    grid-template-columns: repeat(5, minmax(255px, 84vw)) !important;
+  }
+}

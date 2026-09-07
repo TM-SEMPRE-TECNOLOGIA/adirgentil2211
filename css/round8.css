@@ -1,0 +1,684 @@
+/* ======================================================================
+   ROUND 8 — correções de composição, busca interna e legibilidade
+   ====================================================================== */
+
+:root {
+  --r8-blue: #005baa;
+  --r8-blue-deep: #005baa;
+  --r8-green: #12b24b;
+  --r8-yellow: #ffcb05;
+  --r8-cyan: #00b49d;
+  --r8-ink: #111417;
+}
+
+/* ----------------------------------------------------------------------
+   01 / BUSCA INTERNA — substitui prompt() nativo
+   ---------------------------------------------------------------------- */
+body.search-open {
+  overflow: hidden;
+}
+
+.site-search {
+  position: fixed;
+  z-index: 3000;
+  inset: 0;
+  display: grid;
+  place-items: start center;
+  padding: clamp(82px, 8vw, 118px) clamp(18px, 4vw, 60px) 30px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+}
+
+.site-search.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.site-search__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 22, 38, 0.72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.site-search__panel {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  padding: clamp(26px, 3.3vw, 48px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  background: rgba(250, 252, 253, 0.98);
+  box-shadow: 0 34px 100px rgba(0, 30, 58, 0.34);
+}
+
+.site-search__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.site-search__eyebrow {
+  color: var(--r8-green);
+  font: 800 0.68rem/1 "Gotham", sans-serif;
+  letter-spacing: 0.16em;
+}
+
+.site-search__header h2 {
+  margin: 8px 0 0;
+  color: var(--r8-blue-deep);
+  font: 900 clamp(2rem, 4.5vw, 4rem) / 0.93 "Gotham", sans-serif;
+  letter-spacing: -0.055em;
+}
+
+.site-search__close {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0, 91, 170, 0.2);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--r8-blue-deep);
+  font: 500 1.9rem/1 "Gotham", sans-serif;
+  cursor: pointer;
+}
+
+.site-search__form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 91, 170, 0.13);
+}
+
+.site-search__form input {
+  min-width: 0;
+  height: 58px;
+  padding: 0 20px;
+  border: 1px solid rgba(0, 91, 170, 0.23);
+  border-radius: 12px;
+  outline: 0;
+  background: #fff;
+  color: var(--r8-ink);
+  font: 500 1rem/1 "Gotham", sans-serif;
+}
+
+.site-search__form input:focus {
+  border-color: var(--r8-green);
+  box-shadow: 0 0 0 4px rgba(18, 178, 75, 0.1);
+}
+
+.site-search__submit {
+  min-width: 150px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--r8-green);
+  color: #fff;
+  font: 800 0.86rem/1 "Gotham", sans-serif;
+  cursor: pointer;
+}
+
+.site-search__results {
+  padding-top: 18px;
+}
+.site-search__hint,
+.site-search__empty {
+  margin: 0;
+  color: #687b8a;
+  font: 400 0.93rem/1.55 "Gotham", sans-serif;
+}
+
+.site-search__result {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 12px 4px;
+  border-bottom: 1px solid rgba(0, 91, 170, 0.12);
+  color: var(--r8-blue-deep);
+  text-decoration: none;
+}
+
+.site-search__result-index {
+  color: var(--r8-green);
+  font: 900 0.7rem/1 "Gotham", sans-serif;
+  letter-spacing: 0.08em;
+}
+.site-search__result strong {
+  font: 700 0.98rem/1.2 "Gotham", sans-serif;
+}
+.site-search__result > span:last-child {
+  color: var(--r8-green);
+  font-size: 1.2rem;
+}
+
+/* ----------------------------------------------------------------------
+   02 / PROPOSTAS — imagem integral de fundo + degradê para leitura
+   ---------------------------------------------------------------------- */
+.proposal-track {
+  grid-auto-columns: minmax(760px, 78vw) !important;
+  gap: clamp(18px, 1.5vw, 28px) !important;
+}
+
+.proposal-card,
+.proposal-card:nth-child(n) {
+  --r8-proposal-accent: var(--r8-green);
+  position: relative !important;
+  display: block !important;
+  min-height: clamp(470px, 32vw, 570px) !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  background: #005baa !important;
+  box-shadow: none !important;
+}
+.proposal-card:nth-child(2) {
+  --r8-proposal-accent: #0072bc;
+}
+.proposal-card:nth-child(3) {
+  --r8-proposal-accent: #faa61a;
+}
+.proposal-card:nth-child(4) {
+  --r8-proposal-accent: #ffcb05;
+}
+.proposal-card:nth-child(5) {
+  --r8-proposal-accent: #00b49d;
+}
+
+.proposal-card::before {
+  z-index: 5 !important;
+  top: 24px !important;
+  right: 26px !important;
+  color: #fff !important;
+  opacity: 0.84;
+}
+
+.proposal-card::after,
+.proposal-card:nth-child(even)::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 1 !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 91, 170, 0.96) 0%,
+    rgba(0, 91, 170, 0.9) 32%,
+    rgba(0, 91, 170, 0.58) 55%,
+    rgba(0, 91, 170, 0.12) 77%,
+    transparent 100%
+  ) !important;
+  pointer-events: none;
+}
+
+.proposal-image,
+.proposal-card:nth-child(even) .proposal-image {
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  order: initial !important;
+  background: #005baa !important;
+  overflow: hidden !important;
+}
+
+.proposal-image a,
+.proposal-image--photo a,
+.proposal-card:nth-child(even) .proposal-image a {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.proposal-image img,
+.proposal-image--photo img,
+.proposal-image a img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  filter: saturate(0.9) contrast(1.04) !important;
+  border-radius: 0 !important;
+}
+
+.proposal-copy,
+.proposal-card:nth-child(n) .proposal-copy,
+.proposal-card:nth-child(even) .proposal-copy {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  width: min(620px, 58%) !important;
+  min-height: clamp(470px, 32vw, 570px) !important;
+  padding: clamp(40px, 4vw, 66px) !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: #fff !important;
+  order: initial !important;
+}
+
+.proposal-copy::before {
+  width: 64px !important;
+  height: 7px !important;
+  margin-bottom: 22px !important;
+  background: var(--r8-proposal-accent) !important;
+}
+
+.proposal-copy .category {
+  max-width: 12ch !important;
+  color: #fff !important;
+  font: 900 clamp(2.7rem, 4.5vw, 5.4rem) / 0.9 "Gotham", sans-serif !important;
+  letter-spacing: -0.06em !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.proposal-copy .topic {
+  margin-top: 16px !important;
+  color: var(--r8-proposal-accent) !important;
+  font: 800 0.72rem/1.2 "Gotham", sans-serif !important;
+  letter-spacing: 0.15em !important;
+}
+
+.proposal-copy p {
+  max-width: 43ch !important;
+  margin-top: 22px !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font: 400 clamp(0.88rem, 0.95vw, 1rem) / 1.58 "Gotham", sans-serif !important;
+}
+
+.proposal-copy .btn {
+  margin-top: 22px !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(0, 0, 0, 0.12) !important;
+  color: #fff !important;
+}
+
+/* ----------------------------------------------------------------------
+   03 / PRINCIPAIS REALIZAÇÕES — título fora do vidro
+   ---------------------------------------------------------------------- */
+.accomplishments-shell {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
+  align-items: start;
+  gap: clamp(42px, 6vw, 96px);
+}
+
+.accomplishments-head {
+  position: relative;
+  padding-top: 18px;
+  color: #fff;
+}
+
+.accomplishments-head::before {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 8px;
+  margin-bottom: 26px;
+  background: linear-gradient(
+    90deg,
+    var(--r8-green) 0 48%,
+    var(--r8-yellow) 48% 100%
+  );
+}
+
+.accomplishments-head .eyebrow {
+  color: var(--r8-yellow) !important;
+}
+.accomplishments-head h2 {
+  max-width: 9ch;
+  margin: 12px 0 20px;
+  color: #fff !important;
+  font: 900 clamp(3.4rem, 5.8vw, 7rem) / 0.88 "Gotham", sans-serif !important;
+  letter-spacing: -0.065em;
+  overflow: visible !important;
+}
+
+.accomplishments-head p {
+  max-width: 38ch;
+  margin-bottom: 26px;
+  color: rgba(255, 255, 255, 0.76) !important;
+}
+
+.accomplishments-glass {
+  position: relative;
+  padding: clamp(18px, 2.2vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 28px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.065)
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 30px 80px rgba(0, 24, 48, 0.15);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+.accomplishments .intro {
+  all: unset !important;
+}
+.accomplishments .accordion {
+  width: 100%;
+}
+
+/* ----------------------------------------------------------------------
+   04 / FAKE NEWS — banner fotográfico de impacto antes dos cards
+   ---------------------------------------------------------------------- */
+.fake-feature {
+  position: relative;
+  min-height: clamp(310px, 36vw, 560px);
+  margin-top: 34px;
+  overflow: hidden;
+  border: 1px solid rgba(238, 233, 223, 0.18);
+  background: #161819;
+}
+
+.fake-feature__media,
+.fake-feature__shade {
+  position: absolute;
+  inset: 0;
+}
+.fake-feature__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: grayscale(0.32) contrast(1.08) brightness(0.68);
+}
+
+.fake-feature__shade {
+  background: linear-gradient(
+      90deg,
+      rgba(5, 6, 7, 0.96) 0%,
+      rgba(5, 6, 7, 0.72) 34%,
+      rgba(5, 6, 7, 0.2) 68%,
+      rgba(5, 6, 7, 0.58) 100%
+    ),
+    linear-gradient(to top, rgba(5, 6, 7, 0.7), transparent 58%);
+}
+
+.fake-feature__content {
+  position: absolute;
+  z-index: 2;
+  left: clamp(26px, 4vw, 68px);
+  bottom: clamp(28px, 4vw, 62px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.fake-feature__stamp {
+  display: inline-block;
+  padding: 12px 16px 10px;
+  border: 3px solid #fff;
+  background: #e52b28;
+  color: #fff;
+  font: 900 clamp(1.25rem, 2.3vw, 2.5rem) / 0.88 "Gotham", sans-serif;
+  letter-spacing: -0.04em;
+  transform: rotate(-3deg);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.32);
+}
+
+.fake-feature__label {
+  color: rgba(238, 233, 223, 0.88);
+  font: 800 0.72rem/1 "Gotham", sans-serif;
+  letter-spacing: 0.17em;
+}
+
+.fake-grid {
+  margin-top: 1px !important;
+}
+
+/* ----------------------------------------------------------------------
+   05 / FAQ — título realmente fora da caixa de respostas
+   ---------------------------------------------------------------------- */
+.faq-shell {
+  display: block !important;
+}
+
+.faq-intro {
+  position: relative !important;
+  top: auto !important;
+  width: min(900px, 100%);
+  padding: 0 0 38px !important;
+  border-top: 0 !important;
+}
+
+.faq-intro::before {
+  margin-bottom: 18px !important;
+}
+
+.faq-intro h2 {
+  max-width: 12ch !important;
+  margin: 8px 0 20px !important;
+  color: var(--r8-blue) !important;
+  font: 900 clamp(3.6rem, 7vw, 8rem) / 0.88 "Gotham", sans-serif !important;
+  letter-spacing: -0.065em !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.faq-intro p {
+  max-width: 62ch;
+}
+
+.faq-panel {
+  width: 100%;
+  padding: clamp(8px, 1vw, 14px) clamp(22px, 3vw, 44px);
+  border: 1px solid rgba(0, 91, 170, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 24px 70px rgba(0, 63, 120, 0.07);
+}
+
+.faq .accordion {
+  margin: 0 !important;
+}
+
+/* ----------------------------------------------------------------------
+   06 / DEPOIMENTOS — fundo com cor e contraste real
+   ---------------------------------------------------------------------- */
+.testimonials {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #005baa 0%,
+    #005baa 58%,
+    #0072bc 100%
+  ) !important;
+  background-image: linear-gradient(
+    135deg,
+    #005baa 0%,
+    #005baa 58%,
+    #0072bc 100%
+  ) !important;
+  color: #fff;
+}
+
+.testimonials::after {
+  color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.testimonials .section-head h2,
+.testimonials h2 {
+  max-width: 12ch !important;
+  color: #fff !important;
+  text-shadow: 0 2px 18px rgba(0, 24, 48, 0.12);
+}
+
+.testimonials .accent-yellow {
+  color: var(--r8-yellow) !important;
+}
+.testimonials .section-head .btn {
+  background: var(--r8-green) !important;
+  color: #fff !important;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card,
+.testimonial-card:nth-child(n) {
+  background: #005baa !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.testimonial-card:nth-child(n) .testimonial-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 18, 34, 0.98) 0%,
+    rgba(0, 24, 48, 0.88) 38%,
+    rgba(0, 25, 48, 0.25) 68%,
+    rgba(0, 25, 48, 0.04) 100%
+  ) !important;
+}
+
+.testimonial-copy blockquote,
+.testimonial-copy strong {
+  color: #fff !important;
+}
+.testimonial-copy small {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* ----------------------------------------------------------------------
+   RESPONSIVIDADE
+   ---------------------------------------------------------------------- */
+@media (max-width: 999px) {
+  .accomplishments-shell {
+    grid-template-columns: 1fr;
+  }
+  .accomplishments-head h2 {
+    max-width: 12ch;
+  }
+  .proposal-track {
+    grid-auto-columns: minmax(620px, 88vw) !important;
+  }
+  .proposal-copy,
+  .proposal-card:nth-child(n) .proposal-copy {
+    width: min(620px, 68%) !important;
+  }
+}
+
+@media (max-width: 699px) {
+  .site-search {
+    padding: 72px 12px 18px;
+  }
+  .site-search__panel {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+  .site-search__header h2 {
+    font-size: 2.2rem;
+  }
+  .site-search__form {
+    grid-template-columns: 1fr;
+  }
+  .site-search__submit {
+    height: 50px;
+  }
+
+  .proposal-track {
+    grid-auto-columns: 90vw !important;
+  }
+  .proposal-card,
+  .proposal-card:nth-child(n) {
+    min-height: 590px !important;
+    border-radius: 18px !important;
+  }
+  .proposal-card::after,
+  .proposal-card:nth-child(even)::after {
+    background: linear-gradient(
+      to top,
+      rgba(0, 91, 170, 0.98) 0%,
+      rgba(0, 34, 64, 0.92) 48%,
+      rgba(0, 34, 64, 0.4) 75%,
+      rgba(0, 0, 0, 0.08) 100%
+    ) !important;
+  }
+  .proposal-copy,
+  .proposal-card:nth-child(n) .proposal-copy,
+  .proposal-card:nth-child(even) .proposal-copy {
+    justify-content: flex-end !important;
+    width: 100% !important;
+    min-height: 590px !important;
+    padding: 32px 26px 34px !important;
+  }
+  .proposal-copy .category {
+    max-width: 10ch !important;
+    font-size: clamp(2.6rem, 13vw, 4rem) !important;
+  }
+  .proposal-copy p {
+    font-size: 0.86rem !important;
+  }
+
+  .accomplishments-head h2 {
+    font-size: clamp(3.2rem, 15vw, 5rem) !important;
+  }
+  .accomplishments-glass {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .fake-feature {
+    min-height: 360px;
+  }
+  .fake-feature__media img {
+    object-position: 62% center;
+  }
+  .fake-feature__shade {
+    background: linear-gradient(
+      to top,
+      rgba(5, 6, 7, 0.96) 0%,
+      rgba(5, 6, 7, 0.58) 58%,
+      rgba(5, 6, 7, 0.18) 100%
+    );
+  }
+
+  .faq-intro h2 {
+    max-width: 9ch !important;
+    font-size: clamp(3.1rem, 15vw, 5.4rem) !important;
+  }
+  .faq-panel {
+    padding-inline: 16px;
+    border-radius: 18px;
+  }
+
+  .testimonials .section-head {
+    align-items: flex-start !important;
+  }
+  .testimonials h2 {
+    max-width: 9ch !important;
+    font-size: clamp(3rem, 14vw, 5rem) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-search {
+    transition: none;
+  }
+}

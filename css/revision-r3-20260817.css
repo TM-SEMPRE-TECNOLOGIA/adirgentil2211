@@ -1,0 +1,1400 @@
+:root {
+  --r3-blue: #005baa;
+  --r3-blue-deep: #005baa;
+  --r3-green: #07884f;
+  --r3-yellow: #ffcb05;
+}
+
+/* A nova marca é exclusiva do cabeçalho; o lockup original do rodapé permanece intacto. */
+.animated-brand--header-r3 {
+  width: clamp(142px, 10.5vw, 188px);
+  aspect-ratio: 1319 / 475;
+}
+
+.animated-brand--header-r3 .animated-brand__symbol,
+.animated-brand--header-r3 .animated-brand__draw {
+  display: none !important;
+}
+
+.animated-brand--header-r3 .animated-brand__lockup {
+  position: static;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Hero R3: arte final integral, sem zoom que possa cortar o rosto. */
+.hero-static__media {
+  inset: 0;
+}
+
+.hero-static__media img {
+  object-fit: cover;
+  object-position: 50% top;
+  scale: 1;
+}
+
+.hero-static__media::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0 57%,
+    rgba(0, 45, 91, 0.08) 66%,
+    rgba(0, 45, 91, 0.34) 100%
+  );
+}
+
+.hero-static__copy h1 .hero-title__vai {
+  display: inline;
+}
+
+.hero-static__headline {
+  display: contents;
+}
+
+.hero-static__actions {
+  width: min(100%, 390px);
+  align-items: stretch;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-whatsapp-optin {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.hero-whatsapp-optin input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--r3-yellow);
+}
+
+.hero-static__primary.is-optin-locked {
+  cursor: not-allowed;
+  filter: grayscale(0.42);
+  opacity: 0.62;
+}
+
+.hero-static__donate {
+  display: inline-flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.hero-static__donate:hover,
+.hero-static__donate:focus-visible {
+  background: #fff;
+  color: var(--r3-blue-deep);
+  transform: translateY(-2px);
+}
+
+/* Aproxima e uniformiza a galeria atual; as dez fotos finais poderão entrar sem novo layout. */
+.people-marquee--single .people-marquee__track,
+html.a11y-reduce-motion .people-marquee--single .people-marquee__track {
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.people-marquee--single .people-card {
+  flex-basis: clamp(300px, 25vw, 390px) !important;
+  width: clamp(300px, 25vw, 390px) !important;
+  height: clamp(440px, 36vw, 540px) !important;
+  border-radius: 18px;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.people-marquee--single .people-card:nth-child(4n + 2) {
+  z-index: 1;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove a gota e demais formas decorativas atrás da foto da trajetória. */
+.trajectory--editorial .trajectory-photo::before,
+.trajectory--editorial .trajectory-photo::after {
+  display: none !important;
+  content: none !important;
+}
+
+.trajectory--editorial .trajectory-grid::before,
+.trajectory--editorial .trajectory-grid::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Redes oficiais no bloco Acompanhe nossa jornada. */
+.journey-social--official {
+  min-width: 0;
+}
+
+.journey-social-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.journey-social-links a {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  min-height: 78px;
+  padding: 12px;
+  border: 1px solid rgba(7, 93, 167, 0.16);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--r3-blue-deep);
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(0, 44, 91, 0.08);
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.journey-social-links a > span {
+  grid-row: 1 / 3;
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: #005baa !important;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.journey-social-links strong {
+  align-self: end;
+  font-size: 0.92rem;
+}
+
+.journey-social-links small {
+  align-self: start;
+  color: #52708f;
+  font-size: 0.7rem;
+}
+
+.journey-social-links a:hover,
+.journey-social-links a:focus-visible {
+  border-color: var(--r3-yellow);
+  box-shadow: 0 16px 36px rgba(0, 44, 91, 0.15);
+  transform: translateY(-3px);
+}
+
+.journey-social-links a > span svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.footer-socials {
+  max-width: 286px;
+  flex-wrap: wrap;
+}
+
+.footer-socials a svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.journey-grid--single {
+  grid-template-columns: 1fr !important;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.journey-grid--single .journey-social-links {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.participate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  max-width: 900px;
+  margin: 32px auto 0;
+}
+
+@media (max-width: 1024px) {
+  .journey-grid--single .journey-social-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .animated-brand--header-r3 {
+    width: 132px;
+  }
+
+  .hero-static {
+    height: calc(100svh - var(--site-header-total, 110px)) !important;
+    min-height: calc(100svh - var(--site-header-total, 110px)) !important;
+    max-height: calc(100svh - var(--site-header-total, 110px)) !important;
+    margin-top: var(--site-header-total, 110px) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    background: #005baa !important;
+  }
+
+  .hero-static__media {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    translate: none !important;
+    overflow: hidden !important;
+  }
+
+  .hero-static__media img {
+    object-position: 35% top !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .hero-static__media::after {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+      180deg,
+      transparent 0 45%,
+      #005baa 92% 100%
+    ) !important;
+  }
+
+  .hero-static__layout {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -72px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .hero-static__copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 16px calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    translate: none !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .hero-static__headline {
+    display: block !important;
+    width: fit-content !important;
+    margin-inline: auto !important;
+    text-align: left !important;
+  }
+
+  .hero-static__kicker {
+    margin-bottom: clamp(2px, 0.6vh, 5px) !important;
+    font-size: clamp(0.55rem, 2.2vw, 0.65rem) !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .hero-static__copy h1,
+  .hero-static__copy #heroTitle {
+    display: block !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+    margin: 0 !important;
+    font-size: clamp(2rem, 9vw, 3.2rem) !important;
+  }
+
+  /* dissolve o container line2 para que "vai" e "Vencer" fiquem
+     no fluxo direto do h1 */
+  .hero-static__copy h1 .hero-title__line2 {
+    display: contents !important;
+  }
+
+  /* "O Brasil" e "vai" na mesma linha, em branco */
+  .hero-static__copy h1 .hero-title__line1,
+  .hero-static__copy h1 .hero-title__vai {
+    display: inline !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+  }
+
+  /* "Vencer": caixa amarela, texto azul, própria linha */
+  .hero-static__copy h1 .hero-title__accent {
+    display: block !important;
+    width: fit-content !important;
+    margin-top: 0.1em !important;
+    padding: 0.06em 0.16em !important;
+    background: #ffcb05 !important;
+    color: #005baa !important;
+    text-transform: capitalize !important;
+    font-size: 16.8vw !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.045em !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-static__copy > p {
+    display: block !important;
+    width: fit-content !important;
+    margin-top: clamp(4px, 1vh, 8px) !important;
+    margin-bottom: clamp(6px, 1.2vh, 10px) !important;
+    margin-inline: auto !important;
+    padding: 0.18em 0.5em !important;
+    background: #07884f !important;
+    color: #ffffff !important;
+    font-size: 4.6vw !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-static__actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(4px, 0.9vh, 8px) !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  .hero-whatsapp-optin {
+    margin-bottom: 2px !important;
+    font-size: clamp(0.65rem, 2.7vw, 0.74rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-whatsapp-optin span {
+    font-size: inherit !important;
+  }
+
+  .hero-static__primary,
+  .hero-static__actions .btn {
+    width: 100% !important;
+    padding: clamp(8px, 1.3vh, 11px) 16px !important;
+    font-size: clamp(0.78rem, 3.2vw, 0.88rem) !important;
+    min-height: clamp(36px, 5.2vh, 42px) !important;
+    border-radius: 9999px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-static__donate {
+    width: 100% !important;
+    padding: clamp(6px, 1.1vh, 10px) 14px !important;
+    font-size: clamp(0.68rem, 2.8vw, 0.76rem) !important;
+    min-height: clamp(34px, 4.8vh, 38px) !important;
+    border-radius: 9999px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Mobile menu CTA button fix com ícone WhatsApp */
+  .mobile-menu--v2 > a.mobile-menu__cta,
+  .mobile-menu--v2 .mobile-menu__cta,
+  .mobile-menu .mobile-menu__cta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: min(100% - 36px, 420px) !important;
+    margin: 20px auto 0 !important;
+    padding: 14px 20px !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    color: var(--r3-blue-deep, #002c5b) !important;
+    background: var(--r3-yellow, #ffcb05) !important;
+    border-radius: 9999px !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    text-align: center !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+    line-height: 1.2 !important;
+  }
+
+  .mobile-menu__cta .mobile-menu__cta-icon {
+    display: inline-block !important;
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0 !important;
+    fill: currentColor !important;
+  }
+
+  .mobile-menu--v2 > a.mobile-menu__cta span,
+  .mobile-menu--v2 .mobile-menu__cta span,
+  .mobile-menu .mobile-menu__cta span {
+    color: var(--r3-blue-deep, #002c5b) !important;
+    font-size: 1.05rem !important;
+    letter-spacing: normal !important;
+    font-weight: 800 !important;
+    display: inline-block !important;
+    text-transform: none !important;
+  }
+
+  .mobile-menu__cta .whatsapp-word .whatsapp-inline-icon,
+  .mobile-menu__cta svg.whatsapp-inline-icon {
+    display: none !important;
+  }
+
+  .people-marquee--single .people-marquee__track,
+  html.a11y-reduce-motion .people-marquee--single .people-marquee__track {
+    gap: 7px;
+  }
+
+  .people-marquee--single .people-card {
+    flex-basis: 76vw !important;
+    width: 76vw !important;
+    height: min(110vw, 520px) !important;
+  }
+
+  .people-marquee--single .people-card:nth-child(4n + 2) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .journey-social-links,
+  .journey-grid--single .journey-social-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .journey-social-links a {
+    min-height: 60px !important;
+    padding: 10px 8px !important;
+    column-gap: 8px !important;
+    border-radius: 12px !important;
+  }
+
+  .journey-social-links a > span {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .journey-social-links a > span svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .journey-social-links strong {
+    font-size: 0.82rem !important;
+  }
+
+  .participate-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 100%;
+  }
+
+  .proposal-card .proposal-image a {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .proposal-card .proposal-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .proposal-card .proposal-copy .topic {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem) !important;
+    line-height: 1.15;
+    margin: 8px 0 12px;
+  }
+
+  .proposal-card .proposal-copy p {
+    font-size: 0.95rem !important;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+}
+
+/* ==========================================================================
+   Materiais Hub - Redesign Fiel à Arte Final
+   ========================================================================== */
+body.internal-page--materiais {
+  background: #ffffff !important;
+}
+
+body.internal-page--materiais
+  .site-header--v2
+  .nav-links
+  a[aria-current="page"] {
+  color: #ffcb05 !important;
+}
+
+/* Scroll principal do navegador nas cores da identidade visual. */
+html {
+  scrollbar-color: var(--r3-yellow) #003f7d;
+  scrollbar-width: auto;
+}
+
+html::-webkit-scrollbar {
+  width: 13px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #003f7d;
+}
+
+html::-webkit-scrollbar-thumb {
+  border: 3px solid #003f7d;
+  border-radius: 999px;
+  background: var(--r3-yellow);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--r3-green);
+}
+
+.materials-page-section {
+  padding: calc(var(--site-header-total) + 48px) 0 96px;
+  background: #ffffff;
+  min-height: 80vh;
+}
+
+.materials-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.materials-hero-lead {
+  margin-bottom: 40px;
+}
+
+.materials-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #07884f;
+  margin-bottom: 22px;
+}
+
+.materials-flag-dashes {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.materials-flag-dashes .dash-green {
+  width: 14px;
+  height: 4px;
+  background: #07884f;
+  border-radius: 2px;
+}
+
+.materials-flag-dashes .dash-yellow {
+  width: 14px;
+  height: 4px;
+  background: #ffcb05;
+  border-radius: 2px;
+}
+
+.materials-flag-dashes .dash-blue {
+  width: 14px;
+  height: 4px;
+  background: #005baa;
+  border-radius: 2px;
+}
+
+.materials-hero-title {
+  font-size: clamp(3.4rem, 6.8vw, 6.2rem);
+  font-weight: 950;
+  line-height: 0.93;
+  letter-spacing: -0.05em;
+  color: #005baa;
+  margin: 0 0 16px;
+  text-transform: none;
+}
+
+.materials-hero-subtitle {
+  font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+  font-style: italic;
+  color: #526f87;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.materials-catalog-v2 {
+  display: grid;
+  gap: 18px;
+}
+
+.material-card-v2 {
+  border: 1.5px solid #e1e9ef;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(8, 36, 71, 0.035);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+  overflow: hidden;
+}
+
+.material-card-v2:hover {
+  border-color: #bcd4e6;
+  box-shadow: 0 8px 30px rgba(8, 36, 71, 0.07);
+}
+
+.material-card-v2[open] {
+  border-color: #005baa;
+  box-shadow: 0 12px 36px rgba(8, 36, 71, 0.09);
+}
+
+.material-card-v2__summary {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  padding: 28px 36px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.material-card-v2__summary::-webkit-details-marker {
+  display: none;
+}
+
+.material-card-v2__icon-wrap {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #005baa, #0072bc);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 91, 170, 0.18);
+}
+
+.material-card-v2__icon-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.material-card-v2__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.material-card-v2__eyebrow {
+  display: block;
+  color: #07884f;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.material-card-v2__title {
+  display: block;
+  color: #005baa;
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin-bottom: 6px;
+}
+
+.material-card-v2__desc {
+  color: #587184;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.material-card-v2__action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.material-card-v2__action-text {
+  color: #005baa;
+  font-size: 1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.material-card-v2__toggle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #005baa;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.material-card-v2[open] .material-card-v2__toggle-btn {
+  transform: rotate(45deg);
+  background: #005baa;
+}
+
+.material-card-v2__files {
+  padding: 0 36px 32px;
+  border-top: 1px solid #edf2f6;
+  background: #fafcfe;
+}
+
+.material-card-v2__files .material-file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  padding-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .materials-page-section {
+    padding-top: calc(var(--site-header-total) + 28px);
+    padding-bottom: 64px;
+  }
+
+  .materials-container {
+    padding: 0 18px;
+  }
+
+  .materials-hero-title {
+    font-size: clamp(2.6rem, 11vw, 3.8rem);
+  }
+
+  .material-card-v2__summary {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .material-card-v2__icon-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .material-card-v2__icon-wrap img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .material-card-v2__action {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    border-top: 1px solid #f0f4f8;
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+
+  .material-card-v2__files {
+    padding: 0 18px 22px;
+  }
+
+  .material-card-v2__files .material-file-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom file format badges */
+.material-file__format {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #edf5fa;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.material-file__format img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.material-file:hover .material-file__format img {
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   Posicionamento das fotos dos Cards de Propostas (Desktop & Mobile)
+   Análise de composição:
+   - Desktop: degradê azul cobre lado esquerdo (0-55%). Rosto deve ficar em 55-100%.
+   - Mobile: degradê cobre metade inferior. Rosto deve ficar no topo (0-40%).
+   ========================================================================== */
+.proposal-card .proposal-image img {
+  object-fit: cover !important;
+  object-position: 70% 15% !important;
+}
+
+/* Segurança: espelhada horizontalmente → Flávio fica no lado direito (área clara) */
+.proposal-card--seguranca .proposal-image img {
+  transform: scaleX(-1) !important;
+  object-position: 30% center !important;
+}
+
+/* Economia: Flávio no lado DIREITO da foto (~65% X, ~20% Y) - já está na área clara */
+.proposal-card--economia .proposal-image img {
+  object-position: 68% 15% !important;
+}
+
+/* Mulher: Flávio no lado ESQUERDO (~25% X). Para colocá-lo na área direita do card,
+   precisamos deslocar a imagem para a direita usando valor X BAIXO (0%) */
+.proposal-card--mulher .proposal-image img {
+  object-position: 0% 15% !important;
+}
+
+/* Terceira Idade: Flávio no centro-direita (~60% X), rosto caído/abraçando (~35% Y).
+   Mover um pouco para direita para evitar o degradê */
+.proposal-card--terceira-idade .proposal-image img {
+  object-position: 62% 25% !important;
+}
+
+/* Empreendedorismo: espelhada horizontalmente → Flávio passa para o lado direito (área clara) */
+.proposal-card--empreendedorismo .proposal-image img {
+  transform: scaleX(-1) !important;
+  object-position: 80% 10% !important;
+}
+
+/* Saúde: Flávio no centro (~50% X), topo (~20% Y).
+   Centralizar levemente para direita para sair do degradê */
+.proposal-card--saude .proposal-image img {
+  object-position: 55% 10% !important;
+}
+
+/* Agro: foto original */
+.proposal-card--agro .proposal-image img {
+  object-position: 70% center !important;
+}
+
+/* Mobile (iPhone 15 Pro e telas <= 900px)
+   No mobile o degradê fica na metade INFERIOR. O rosto deve ficar no TOPO.
+   Valor Y baixo (0-15%) = rosto no topo visível. */
+@media (max-width: 900px) {
+  .proposal-card .proposal-image img {
+    object-position: center 5% !important;
+  }
+  /* Segurança: foto original */
+  .proposal-card--seguranca .proposal-image img {
+    object-position: center 5% !important;
+  }
+  /* Economia: Flávio lado direito, rosto no topo */
+  .proposal-card--economia .proposal-image img {
+    object-position: 68% 5% !important;
+  }
+  /* Mulher: Flávio lado esquerdo - centralizar para mostrar o casal no topo */
+  .proposal-card--mulher .proposal-image img {
+    object-position: 20% 5% !important;
+  }
+  /* Terceira Idade: Flávio centro-direita, rosto inclinado - usar Y um pouco maior */
+  .proposal-card--terceira-idade .proposal-image img {
+    object-position: 62% 10% !important;
+  }
+  /* Empreendedorismo: Flávio lado esquerdo, rosto no topo */
+  .proposal-card--empreendedorismo .proposal-image img {
+    object-position: 15% 5% !important;
+  }
+  /* Saúde: Flávio centralizado, rosto no topo */
+  .proposal-card--saude .proposal-image img {
+    object-position: 50% 5% !important;
+  }
+  /* Agro: foto original */
+  .proposal-card--agro .proposal-image img {
+    object-position: center 5% !important;
+  }
+}
+
+/* ==========================================================================
+   Propostas — fotos oficiais do desktop (fotosok/desktop)
+   Servidas via <picture> acima de 700px, já recortadas em 861x569 para o
+   card (860x570). Alinhadas à direita: acima de 1075px o card trava em
+   860px e não há corte; abaixo disso ele encolhe e o corte tira da
+   esquerda, preservando o Flávio. O transform:none anula o espelhamento
+   antigo, que agora não é mais necessário.
+   ========================================================================== */
+@media (min-width: 700px) {
+  .proposal-card .proposal-image img,
+  .proposal-card--seguranca .proposal-image img,
+  .proposal-card--economia .proposal-image img,
+  .proposal-card--mulher .proposal-image img,
+  .proposal-card--terceira-idade .proposal-image img,
+  .proposal-card--empreendedorismo .proposal-image img,
+  .proposal-card--saude .proposal-image img,
+  .proposal-card--agro .proposal-image img {
+    object-fit: cover !important;
+    object-position: right center !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Paginas de acao (/contribua, /bolsozap, /redes-sociais)
+   Conteudo proprio e indexavel; o link externo fica so no botao.
+   ========================================================================== */
+.acao-layout {
+  display: grid;
+  gap: clamp(28px, 5vw, 48px);
+  max-width: 860px;
+}
+
+.acao-copy p {
+  margin: 0 0 18px;
+  font-size: clamp(1rem, 2.4vw, 1.12rem);
+  line-height: 1.7;
+  color: #30445b;
+}
+
+.acao-cta {
+  margin-top: 8px;
+  display: inline-flex;
+}
+
+.acao-note {
+  margin-top: 14px !important;
+  font-size: 0.86rem !important;
+  color: #64798f !important;
+}
+
+.acao-redes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.acao-redes a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 2px 14px;
+  padding: 16px 18px;
+  border: 1px solid #dbe5ef;
+  border-radius: 16px;
+  background: #fff;
+  color: #073b71;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acao-redes a:hover,
+.acao-redes a:focus-visible {
+  border-color: #005baa;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 91, 170, 0.12);
+}
+
+.acao-redes__icon {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #fff;
+  background: #005baa;
+}
+
+.acao-redes__nome {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.acao-redes__handle {
+  font-size: 0.82rem;
+  color: #64798f;
+}
+
+.acao-proximos {
+  padding-top: 8px;
+  border-top: 1px solid #dbe5ef;
+}
+.acao-proximos h2 {
+  margin: 18px 0 14px;
+  font-size: 1.15rem;
+  color: #073b71;
+}
+.acao-proximos__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.acao-proximos__links a {
+  padding: 9px 16px;
+  border: 1px solid #dbe5ef;
+  border-radius: 999px;
+  color: #005baa;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.acao-proximos__links a:hover,
+.acao-proximos__links a:focus-visible {
+  background: #eaf2fa;
+  border-color: #005baa;
+}
+
+/* Frase de apoio no hero de /flavio, abaixo do H1 */
+.internal-hero__tagline {
+  margin: 0 0 6px !important;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  color: var(--brand-yellow, #ffd21c);
+  letter-spacing: -0.01em;
+}
+
+/* Subtitulo do Kit de Campanha, antes um H1 */
+.materials-hero-subtitle {
+  margin: 14px 0 0;
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Subtitulo do Plano de Governo, antes parte do H1 */
+.fbp-subtitle {
+  margin: 10px 0 0;
+  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  font-weight: 600;
+  opacity: 0.82;
+}
+
+@media (max-width: 760px) {
+  .acao-redes {
+    grid-template-columns: 1fr;
+  }
+  .acao-redes a {
+    padding: 14px 15px;
+  }
+}
+
+html.a11y-dark-mode .acao-redes a,
+html.a11y-dark-mode .acao-copy p {
+  color: inherit;
+}
+
+/* Par de links nos blocos da pagina Participe: acao externa + pagina interna */
+.action-detail__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+.action-detail__more {
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  opacity: 0.9;
+}
+.action-detail__more:hover,
+.action-detail__more:focus-visible {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   20260820 — hero da home: conteudo a esquerda (SOMENTE DESKTOP)
+   O bloco de mobile fica no @media (max-width: 760px) acima e nao e tocado.
+   ========================================================================== */
+@media (min-width: 761px) {
+  /* a copy sai da coluna 2 (direita) para a coluna 1 (esquerda) */
+  .hero-static__layout {
+    grid-template-columns: minmax(360px, 46%) minmax(0, 54%) !important;
+  }
+
+  .hero-static__copy {
+    grid-column: 1 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding: 42px 46px 40px 0 !important;
+  }
+
+  /* o degrade escurecia a direita; agora acompanha o texto e escurece a esquerda */
+  .hero-static__media::after {
+    background: linear-gradient(
+      270deg,
+      transparent 0 53%,
+      rgba(3, 35, 77, 0.1) 60%,
+      rgba(3, 35, 77, 0.55) 100%
+    ) !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     titulo no estilo do mobile (caixa amarela + caixa verde), porem
+     alinhado a esquerda. Tamanhos em vw com teto em rem para nao estourar
+     a coluna quando o container para de crescer.
+     ---------------------------------------------------------------------- */
+  .hero-static__copy {
+    text-align: left !important;
+  }
+
+  .hero-static__headline {
+    width: fit-content !important;
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  .hero-static__copy h1,
+  .hero-static__copy #heroTitle {
+    display: block !important;
+    max-width: none !important;
+    width: fit-content !important;
+    margin: 0 !important;
+    font-size: clamp(3.2rem, 5.5vw, 5rem) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  /* dissolve o container line2: "vai" volta para o fluxo do h1 */
+  .hero-static__copy h1 .hero-title__line2 {
+    display: contents !important;
+  }
+
+  /* "O Brasil" e "vai" na mesma linha, em branco */
+  .hero-static__copy h1 .hero-title__line1,
+  .hero-static__copy h1 .hero-title__vai {
+    display: inline !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+  }
+
+  /* "Vencer": caixa amarela, texto azul, linha propria */
+  .hero-static__copy h1 .hero-title__accent {
+    display: block !important;
+    width: fit-content !important;
+    margin-top: 0.1em !important;
+    padding: 0.06em 0.16em !important;
+    background: #ffcb05 !important;
+    color: #005baa !important;
+    text-transform: capitalize !important;
+    font-size: clamp(6rem, 10.3vw, 9.4rem) !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.045em !important;
+    white-space: nowrap !important;
+  }
+
+  /* "Vamos tirar o pais do vermelho": caixa verde */
+  .hero-static__copy > p {
+    display: block !important;
+    width: fit-content !important;
+    margin: 14px 0 0 !important;
+    padding: 0.18em 0.5em !important;
+    background: #07884f !important;
+    color: #fff !important;
+    font-size: clamp(1.2rem, 2.4vw, 2.2rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    text-shadow: none !important;
+  }
+}
+
+/* rodape: bloco legal centralizado */
+.footer-legal-id {
+  justify-items: center !important;
+  text-align: center !important;
+}
+
+/* ==========================================================================
+   20260820 — rodape no mobile: fecha o vao entre as colunas
+   Em grid de 2 colunas a altura da linha e ditada pelo bloco mais alto
+   ("Acessos", com 6 links), o que deixava um vao morto embaixo de
+   "Conteudo", que tem 3. Colunas CSS empacotam os blocos na vertical.
+   Desktop e tablet nao mudam.
+   ========================================================================== */
+@media (max-width: 639px) {
+  .footer-grid--v2 {
+    display: block !important;
+    column-count: 2 !important;
+    column-gap: 24px !important;
+  }
+
+  /* a marca e as redes seguem ocupando a largura toda, acima das colunas */
+  .footer-grid--v2 .footer-brand {
+    column-span: all !important;
+    margin-bottom: 26px !important;
+  }
+
+  /* nenhum bloco pode ser partido no meio entre uma coluna e outra */
+  .footer-grid--v2 > div {
+    break-inside: avoid !important;
+    -webkit-column-break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 0 0 22px !important;
+  }
+}
+
+/* ==========================================================================
+   20260820 — aviso do canal do WhatsApp no hero
+   Substitui o checkbox de opt-in. Texto corrido bem leve, com quatro
+   trechos em negrito (os <strong> do HTML).
+   ========================================================================== */
+.hero-whatsapp-note {
+  margin: 0 0 4px !important;
+  max-width: 46ch;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 300;
+  line-height: 1.4;
+  opacity: 0.92;
+  text-wrap: pretty;
+}
+
+.hero-whatsapp-note strong {
+  font-weight: 800;
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .hero-whatsapp-note {
+    max-width: 100% !important;
+    margin-bottom: clamp(3px, 0.8vh, 6px) !important;
+    font-size: clamp(0.6rem, 2.5vw, 0.68rem) !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+  }
+}
+
+
+/* CARROSSEL 'PERTO DAS PESSOAS' ELEGANTE, UNIFORME E SEM SOBREPOSIÇÃO */
+.people-marquee--single {
+  overflow: hidden !important;
+  padding: 36px 0 54px !important;
+}
+
+.people-marquee--single .people-marquee__track {
+  display: flex !important;
+  align-items: center !important;
+  gap: 22px !important;
+  width: max-content !important;
+  padding: 10px 0 !important;
+  animation: people-marquee 58s linear infinite !important;
+}
+
+.people-marquee--single .people-marquee__track:hover {
+  animation-play-state: paused !important;
+}
+
+.people-marquee--single .people-card {
+  flex: 0 0 310px !important;
+  width: 310px !important;
+  height: 430px !important;
+  min-height: 430px !important;
+  margin: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 14px 34px rgba(0, 23, 54, 0.28) !important;
+  transform: none !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.people-marquee--single .people-card:hover {
+  transform: translateY(-8px) scale(1.025) !important;
+  border-color: #ffcb05 !important;
+  box-shadow: 0 24px 50px rgba(0, 23, 54, 0.45) !important;
+  z-index: 5 !important;
+}
+
+.people-marquee--single .people-card img {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.5s ease !important;
+}
+
+.people-marquee--single .people-card:hover img {
+  transform: scale(1.05) !important;
+}
+
+.people-card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 30px 16px 14px;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 23, 46, 0.88) 100%);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .people-marquee--single .people-card {
+    flex: 0 0 260px !important;
+    width: 260px !important;
+    height: 370px !important;
+    min-height: 370px !important;
+  }
+}

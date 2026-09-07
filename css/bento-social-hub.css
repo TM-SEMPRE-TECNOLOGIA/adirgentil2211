@@ -1,0 +1,514 @@
+/* ==========================================================================
+   BENTO GRID SOCIAL HUB — ADIR GENTIL 2211
+   Design Premium estilo Awwwards / Bento UI / Dark Elegance
+   ========================================================================== */
+
+.bento-social-section {
+  padding: 80px 0;
+  background: radial-gradient(circle at 50% 20%, #0d213f 0%, #061120 100%);
+  color: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-social-section::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 91, 170, 0.25) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.bento-social-section::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(1, 95, 52, 0.25) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.bento-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+}
+
+.bento-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 203, 5, 0.12);
+  border: 1px solid rgba(255, 203, 5, 0.3);
+  border-radius: 999px;
+  color: #ffcb05;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.bento-badge span.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #ffcb05;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffcb05;
+  animation: pulseBlink 2s infinite ease-in-out;
+}
+
+@keyframes pulseBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.bento-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.bento-title .accent-yellow {
+  color: #ffcb05;
+}
+
+.bento-title .accent-green {
+  color: #12b24b;
+}
+
+.bento-subtitle {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* GRID PRINCIPAL */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* CARDS GERAIS */
+.bento-card {
+  background: rgba(15, 27, 49, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 203, 5, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 91, 170, 0.2);
+}
+
+/* CARD 1: HERO INSTAGRAM (Largura: 8 colunas) */
+.bento-card-instagram {
+  grid-column: span 8;
+  background: linear-gradient(135deg, rgba(23, 37, 65, 0.85) 0%, rgba(13, 21, 38, 0.95) 100%);
+  border: 1px solid rgba(225, 48, 108, 0.25);
+}
+
+.bento-card-instagram:hover {
+  border-color: rgba(225, 48, 108, 0.6);
+  box-shadow: 0 20px 45px -15px rgba(225, 48, 108, 0.25);
+}
+
+.bento-insta-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.bento-insta-avatar-wrap {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  flex-shrink: 0;
+}
+
+.bento-insta-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #003f7d;
+  display: block;
+}
+
+.bento-insta-info h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px 0;
+}
+
+.bento-insta-info h3 svg {
+  color: #38bdf8;
+}
+
+.bento-insta-handle {
+  font-size: 0.95rem;
+  color: #ffcb05;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bento-insta-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 18px 0 24px 0;
+}
+
+.bento-insta-post {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: #1e293b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.bento-insta-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.bento-insta-post:hover img {
+  transform: scale(1.08);
+}
+
+.bento-insta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  color: #f8fafc;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.bento-btn-insta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.35);
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.bento-btn-insta:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(220, 39, 67, 0.45);
+}
+
+/* CARD 2: WHATSAPP COMUNIDADE (Largura: 4 colunas) */
+.bento-card-whatsapp {
+  grid-column: span 4;
+  background: linear-gradient(135deg, rgba(1, 95, 52, 0.4) 0%, rgba(6, 40, 24, 0.8) 100%);
+  border: 1px solid rgba(18, 178, 75, 0.3);
+}
+
+.bento-card-whatsapp:hover {
+  border-color: #12b24b;
+  box-shadow: 0 20px 45px -15px rgba(18, 178, 75, 0.3);
+}
+
+.bento-card-top-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.bento-card-whatsapp .bento-card-top-icon {
+  background: rgba(18, 178, 75, 0.2);
+  color: #25d366;
+}
+
+.bento-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.bento-card-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.bento-btn-zap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: #25d366;
+  color: #062818;
+  font-weight: 800;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.bento-btn-zap:hover {
+  background: #2ee06e;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(37, 211, 102, 0.45);
+}
+
+/* CARD 3: TIKTOK (Largura: 4 colunas) */
+.bento-card-tiktok {
+  grid-column: span 4;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-card-tiktok .bento-card-top-icon {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.bento-btn-tiktok {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bento-btn-tiktok:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* CARD 4: FACEBOOK (Largura: 4 colunas) */
+.bento-card-facebook {
+  grid-column: span 4;
+  border: 1px solid rgba(24, 119, 242, 0.25);
+}
+
+.bento-card-facebook .bento-card-top-icon {
+  background: rgba(24, 119, 242, 0.18);
+  color: #1877f2;
+}
+
+.bento-btn-facebook {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(24, 119, 242, 0.15);
+  color: #93c5fd;
+  font-weight: 700;
+  border: 1px solid rgba(24, 119, 242, 0.3);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bento-btn-facebook:hover {
+  background: #1877f2;
+  color: #ffffff;
+}
+
+/* CARD 5: X (TWITTER) (Largura: 4 colunas) */
+.bento-card-x {
+  grid-column: span 4;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-card-x .bento-card-top-icon {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.bento-btn-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bento-btn-x:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* CARD 6: BANNER FIGURINHAS (Largura: 12 colunas) */
+.bento-card-stickers {
+  grid-column: span 12;
+  background: linear-gradient(90deg, rgba(0, 91, 170, 0.5) 0%, rgba(1, 95, 52, 0.5) 100%);
+  border: 1px solid rgba(255, 203, 5, 0.3);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 26px 36px;
+}
+
+.bento-stickers-text h4 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+.bento-stickers-text p {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.bento-stickers-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bento-sticker-thumb {
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 4px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.bento-sticker-thumb:hover {
+  transform: scale(1.15) rotate(4deg);
+}
+
+.bento-btn-stickers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: #ffcb05;
+  color: #003f7d;
+  font-weight: 800;
+  border-radius: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(255, 203, 5, 0.35);
+  transition: all 0.3s ease;
+}
+
+.bento-btn-stickers:hover {
+  background: #ffe066;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 203, 5, 0.45);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .bento-card-instagram {
+    grid-column: span 12;
+  }
+  .bento-card-whatsapp {
+    grid-column: span 12;
+  }
+  .bento-card-tiktok,
+  .bento-card-facebook,
+  .bento-card-x {
+    grid-column: span 4;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .bento-card-instagram,
+  .bento-card-whatsapp,
+  .bento-card-tiktok,
+  .bento-card-facebook,
+  .bento-card-x,
+  .bento-card-stickers {
+    grid-column: span 1;
+  }
+  .bento-insta-preview {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .bento-card-stickers {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+  .bento-stickers-preview {
+    justify-content: center;
+  }
+  .bento-btn-stickers {
+    width: 100%;
+  }
+}
