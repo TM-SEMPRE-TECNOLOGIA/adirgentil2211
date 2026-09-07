@@ -587,16 +587,19 @@
 }
 
 
+
+
 /* ==============================================================================
    CALL TO ACTION (CTA) OFICIAL DE COMPARTILHAMENTO DA URNA ELETRÔNICA
+   Posicionado logo abaixo da Urna
    Compliance: Resolução TSE nº 23.610/2019 (Engajamento e Compartilhamento Orgânico)
 ============================================================================== */
 .urna-share-cta {
-  margin-top: 36px;
+  margin-top: 32px;
   background: linear-gradient(135deg, rgba(0, 43, 127, 0.95) 0%, rgba(10, 25, 47, 0.98) 100%);
   border: 2px solid rgba(255, 203, 5, 0.35);
   border-radius: 20px;
-  padding: 32px 36px;
+  padding: 30px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -654,7 +657,7 @@
 }
 
 .urna-share-cta__title {
-  font-size: 1.65rem;
+  font-size: 1.6rem;
   font-weight: 900;
   color: #ffffff;
   margin-bottom: 10px;
