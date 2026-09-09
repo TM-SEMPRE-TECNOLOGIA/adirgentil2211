@@ -567,16 +567,39 @@
 .cookie-manage {
   position: fixed;
   z-index: 9990;
-  left: 16px;
-  bottom: 16px;
-  padding: 9px 13px;
+  left: 20px !important;
+  bottom: 20px !important;
+  right: auto !important;
+  transform: none !important;
+  padding: 8px 14px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
   color: #fff;
-  background: #005baa;
+  background: rgba(0, 91, 170, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   font: inherit;
   font-size: 0.74rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cookie-manage:hover {
+  background: #005caa;
+  color: #ffcb05;
+  border-color: #ffcb05;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 640px) {
+  .cookie-manage {
+    left: 12px !important;
+    bottom: 12px !important;
+    padding: 6px 11px;
+    font-size: 0.70rem;
+    background: rgba(0, 60, 110, 0.95);
+  }
 }
 
 @media (max-width: 900px) {

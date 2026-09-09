@@ -65,8 +65,15 @@
         submitBtn.innerText = "CADASTRANDO...";
       }
 
+      // Determina o endpoint da API (direciona para o Dashboard local na 3005 ou relativo em produção)
+      const API_BASE =
+        window.__CAMPAIGN_API_BASE ||
+        (window.location.port === "3001" || window.location.hostname === "localhost"
+          ? "http://localhost:3005"
+          : "");
+
       try {
-        const response = await fetch("/api/newsletter/subscribe", {
+        const response = await fetch(`${API_BASE}/api/newsletter/subscribe`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

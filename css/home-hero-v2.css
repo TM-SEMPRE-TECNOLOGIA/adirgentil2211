@@ -148,9 +148,10 @@
 
 .home-page .cookie-manage {
   right: auto !important;
-  left: 50% !important;
+  left: 20px !important;
+  bottom: 20px !important;
   white-space: nowrap;
-  transform: translateX(-50%) !important;
+  transform: none !important;
 }
 
 .home-page .hero-static--campaign .hero-static__copy > p {

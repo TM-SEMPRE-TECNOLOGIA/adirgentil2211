@@ -1,5 +1,5 @@
 /**
- * Telemetria & Analytics em Tempo Real — Campanha Flávio Bolsonaro Presidente 22
+ * Telemetria & Analytics em Tempo Real — Campanha Oficial Adir Gentil 2211
  * Eventos de interacao observados no site, sem cookies invasivos.
  * Pageviews e IP sao registrados apenas pelo servidor para evitar duplicidade
  * e impedir que o navegador informe um endereco arbitrario.
@@ -41,14 +41,20 @@
     // e-mail e IP nunca sao enviados pelo navegador ao dataLayer.
     pushDataLayer(payload.type, payload.meta);
 
+    const apiBase =
+      window.__CAMPAIGN_API_BASE ||
+      (window.location.port === "3001" || window.location.hostname === "localhost"
+        ? "http://localhost:3005"
+        : "");
+
     try {
       if (navigator.sendBeacon) {
         const blob = new Blob([JSON.stringify(payload)], {
           type: "application/json",
         });
-        navigator.sendBeacon("/api/analytics/track", blob);
+        navigator.sendBeacon(`${apiBase}/api/analytics/track`, blob);
       } else {
-        fetch("/api/analytics/track", {
+        fetch(`${apiBase}/api/analytics/track`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -96,7 +102,7 @@
       const isMaterialDownload =
         trackAttr === "download_material" ||
         trackAttr === "download_plano_governo" ||
-        href.includes("materiais.flaviobolsonaro.com.br") ||
+        href.includes("materiais.adirgentil2211.com.br") ||
         href.startsWith("/downloads/") ||
         /\.(pdf|zip|ai|eps|jpg|jpeg|png|psd|mp3|wav|webp)(\?.*)?$/i.test(href);
 
